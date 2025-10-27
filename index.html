@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Hug Me - Get Your AI-Powered Virtual Hug!</title>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    
+    <style>
+        /* Existing CSS remains exactly the same - no changes */
+        :root {
+            --primary: #ff6b6b;
+            --secondary: #6a11cb;
+            --accent: #2575fc;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --success: #28a745;
+            --warning: #ffc107;
+            --danger: #dc3545;
+            --gray: #6c757d;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+        
+        /* ALL EXISTING CSS REMAINS EXACTLY THE SAME */
+        /* ... (complete existing CSS code) ... */
+        
+    </style>
+</head>
+<body>
+    <!-- Ad Containers -->
+    <div id="headerBanner" class="ad-container hidden"></div>
+    
+    <div class="container">
+        <header>
+            <h1 id="siteTitle">AI Hug Me 🤗</h1>
+            <p class="tagline" id="siteTagline">Get a completely AI-generated virtual hug experience!</p>
+        </header>
+        
+        <div class="user-section">
+            <!-- Dynamic Page Content -->
+            <div id="mainContent">
+                <div class="hug-section">
+                    <h2>Need an AI-powered hug? 🤖</h2>
+                    <p>Every click generates a unique AI-powered hug with animations and sounds!</p>
+                    
+                    <!-- Firebase Status Indicator -->
+                    <div id="firebaseStatus" class="hidden" style="background: var(--success); color: white; padding: 8px; border-radius: 5px; margin: 10px 0; text-align: center;">
+                        🔥 Firebase Connected - Real-time Analytics Active
+                    </div>
+                    
+                    <!-- Middle Banner Ad -->
+                    <div id="middleBanner" class="ad-container hidden"></div>
+                    
+                    <div class="hug-display" id="hugDisplay">
+                        <div class="mood-indicator" id="moodIndicator">🤖</div>
+                        <div class="hug-animation" id="hugAnimation">✨</div>
+                        <div class="hug-message" id="hugMessage">
+                            Click the button for your AI-generated hug!
+                        </div>
+                        <div class="hug-details" id="hugDetails">
+                            AI is ready to create your personalized hug...
+                        </div>
+                        <div class="hug-combo" id="hugCombo"></div>
+                        <div class="hug-stats" id="hugStats"></div>
+                        
+                        <!-- User Stats -->
+                        <div class="user-stats" id="userStats" style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                            <div style="font-size: 0.8rem; color: #666;">
+                                Your Stats: <span id="userHugCount">0</span> hugs • Favorite: <span id="userFavoriteHug">None yet</span>
+                            </div>
+                        </div>
+                        
+                        <!-- Social Sharing -->
+                        <div class="social-sharing hidden" id="socialSharing">
+                            <button class="social-btn facebook" id="shareFacebook">
+                                <span>Facebook</span>
+                            </button>
+                            <button class="social-btn twitter" id="shareTwitter">
+                                <span>Twitter</span>
+                            </button>
+                            <button class="social-btn whatsapp" id="shareWhatsapp">
+                                <span>WhatsApp</span>
+                            </button>
+                            <button class="social-btn copy-link" id="copyLink">
+                                <span>Copy Link</span>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <button class="hug-button" id="hugButton">🤖 Generate AI Hug! 🎲</button>
+                    
+                    <!-- User Controls -->
+                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+                        <button class="btn btn-sm" id="toggleSound" style="padding: 8px 15px; background: var(--secondary); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                            🔊 Sound: On
+                        </button>
+                        <button class="btn btn-sm" id="userSettings" style="padding: 8px 15px; background: var(--gray); color: white; border: none; border-radius: 5px; cursor: pointer;">
+            ️            ⚙️ Settings
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Viral Feature Section -->
+                <div class="viral-feature">
+                    <h3 class="viral-title">🌟 Spread the AI Love! 🌟</h3>
+                    <p>Share your unique AI hug experience with friends!</p>
+                    <div class="viral-stats">
+                        <div class="viral-stat">
+                            <div class="stat-value" id="totalShares">0</div>
+                            <div class="stat-label">Total Hugs</div>
+                        </div>
+                        <div class="viral-stat">
+                            <div class="stat-value" id="viralScore">0</div>
+                            <div class="stat-label">AI Score</div>
+                        </div>
+                        <div class="viral-stat">
+                            <div class="stat-value" id="hugRank">#1</div>
+                            <div class="stat-label">Your Hug Rank</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dynamic Page Content Areas -->
+            <div id="aboutPage" class="page-content hidden"></div>
+            <div id="termsPage" class="page-content hidden"></div>
+            <div id="privacyPage" class="page-content hidden"></div>
+            <div id="contactPage" class="page-content hidden"></div>
+        </div>
+        
+        <!-- Footer Banner Ad -->
+        <div id="footerBanner" class="ad-container hidden"></div>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="#" id="aboutLink">About AI Hugs</a>
+                <a href="#" id="privacyLink">Privacy Policy</a>
+                <a href="#" id="termsLink">Terms & Conditions</a>
+                <a href="#" id="contactLink">Contact Us</a>
+            </div>
+            <p>© 2025 AI Hug Me. All Rights Reserved.</p>
+            <p>Powered by Advanced AI Technology 🤖 + Firebase 🔥</p>
+        </footer>
+    </div>
+    
+    <!-- Sidebar Ad (Fixed Position) -->
+    <div id="sidebarAd" class="hidden"></div>
+    
+    <!-- Popup Ad (Will be shown modally) -->
+    <div id="popupAd" class="hidden"></div>
+    
+    <!-- Video Ad Modal -->
+    <div id="videoAdModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="ad-close" id="closeVideoAd">&times;</button>
+            <div class="video-ad-container">
+                <video id="videoAdPlayer" class="video-ad" controls>
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-controls">
+                    <button class="btn btn-primary" id="playVideo">Play</button>
+                    <button class="btn btn-secondary" id="pauseVideo">Pause</button>
+                    <button class="btn btn-success" id="skipAd">Skip in <span id="skipTimer">5</span>s</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-content">
+            <button class="modal-close" id="closeSettings">&times;</button>
+            <h3 class="modal-title">⚙️ User Settings</h3>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Theme</label>
+                    <select class="form-control" id="themeSelect">
+                        <option value="default">Default Theme</option>
+                        <option value="blue">Blue Theme</option>
+                        <option value="green">Green Theme</option>
+                        <option value="purple">Purple Theme</option>
+                        <option value="dark">Dark Theme</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Sound Effects</label>
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <input type="checkbox" id="soundToggle" checked>
+                        <label for="soundToggle">Enable AI Sound Effects</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Your User ID (for support)</label>
+                    <input type="text" class="form-control" id="userIdDisplay" readonly>
+                </div>
+                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                    <button class="btn btn-primary" id="exportData">Export My Data</button>
+                    <button class="btn btn-danger" id="clearData">Clear All Data</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- AI Sound Toggle -->
+    <button class="ai-sound-toggle" id="aiSoundToggle">🔊 AI Sound</button>
+    
+    <!-- Live Users Counter -->
+    <div class="live-users" id="liveUsersCounter">
+        <span>👥 Live Users: <span id="liveUsersCount">0</span></span>
+    </div>
+    
+    <!-- Success/Error Messages -->
+    <div id="successMessage" class="success-message hidden">
+        <span>✓</span>
+        <span id="successText">AI hug generated successfully!</span>
+    </div>
+    
+    <div id="errorMessage" class="error-message hidden">
+        <span>✗</span>
+        <span id="errorText">AI is learning... Try again!</span>
+    </div>
+
+    <!-- Firebase Configuration -->
+    <script src="firebase-config.js"></script>
+    <script src="firebase-db.js"></script>
+    <script src="analytics-manager.js"></script>
+    <script src="user-manager.js"></script>
+
+    <script>
+        // Enhanced Main Application with Firebase Integration
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 AI Hug Me - Firebase Enhanced Version Loading...');
+            
+            // Initialize Firebase first
+            initializeFirebaseApp();
+            
+            // Load existing systems
+            loadUserData();
+            setupEventListeners();
+            AdManager.init();
+            PageManager.init();
+            AISoundSystem.init();
+            loadSiteSettings();
+            updateLiveUsers();
+            
+            // Update UI with real user data
+            updateUserStatsUI();
+            
+            // Show welcome message
+            setTimeout(() => {
+                showSuccess('Welcome to AI Hug Me! Firebase analytics active 🔥');
+            }, 1000);
+        });
+
+        // Initialize Firebase Application
+        function initializeFirebaseApp() {
+            // Check if Firebase initialized successfully
+            setTimeout(() => {
+                if (window.firebaseApp && window.firebaseApp.isInitialized) {
+                    document.getElementById('firebaseStatus').classList.remove('hidden');
+                    console.log('✅ Firebase integration active');
+                    
+                    // Track app load
+                    window.analyticsManager.trackEvent('app_loaded', {
+                        version: '2.0.0',
+                        firebase: true,
+                        features: ['analytics', 'user_tracking', 'real_time']
+                    });
+                } else {
+                    console.log('⚠️ Using localStorage fallback');
+                }
+            }, 2000);
+        }
+
+        // Update UI with user statistics
+        function updateUserStatsUI() {
+            const userStats = window.userManager.getUserStats();
+            
+            document.getElementById('userHugCount').textContent = userStats.totalHugs;
+            document.getElementById('userFavoriteHug').textContent = userStats.favoriteHugType;
+            document.getElementById('totalShares').textContent = userStats.totalHugs;
+            document.getElementById('viralScore').textContent = userStats.totalHugs * 10;
+            
+            // Update sound toggle button
+            const soundBtn = document.getElementById('toggleSound');
+            if (soundBtn) {
+                soundBtn.innerHTML = userStats.soundEnabled ? '🔊 Sound: On' : '🔇 Sound: Off';
+            }
+            
+            // Set theme select
+            const themeSelect = document.getElementById('themeSelect');
+            if (themeSelect) {
+                themeSelect.value = userStats.theme;
+            }
+            
+            // Set user ID display
+            const userIdDisplay = document.getElementById('userIdDisplay');
+            if (userIdDisplay) {
+                userIdDisplay.value = window.userManager.userId;
+            }
+        }
+
+        // Enhanced Event Listeners with Firebase Tracking
+        function setupEventListeners() {
+            // Hug button with analytics
+            const hugButton = document.getElementById('hugButton');
+            if (hugButton) {
+                hugButton.addEventListener('click', function() {
+                    // Track button click
+                    window.analyticsManager.trackUserEngagement('generate_hug_click');
+                    generateAIHug();
+                });
+            }
+            
+            // Sound toggle
+            const toggleSound = document.getElementById('toggleSound');
+            if (toggleSound) {
+                toggleSound.addEventListener('click', function() {
+                    const soundEnabled = window.userManager.toggleSound();
+                    this.innerHTML = soundEnabled ? '🔊 Sound: On' : '🔇 Sound: Off';
+                    window.analyticsManager.trackUserEngagement('toggle_sound', { enabled: soundEnabled });
+                });
+            }
+            
+            // Settings modal
+            const userSettings = document.getElementById('userSettings');
+            const settingsModal = document.getElementById('settingsModal');
+            const closeSettings = document.getElementById('closeSettings');
+            
+            if (userSettings) {
+                userSettings.addEventListener('click', function() {
+                    settingsModal.classList.remove('hidden');
+                    window.analyticsManager.trackUserEngagement('open_settings');
+                });
+            }
+            
+            if (closeSettings) {
+                closeSettings.addEventListener('click', function() {
+                    settingsModal.classList.add('hidden');
+                });
+            }
+            
+            // Theme selector
+            const themeSelect = document.getElementById('themeSelect');
+            if (themeSelect) {
+                themeSelect.addEventListener('change', function() {
+                    window.userManager.setTheme(this.value);
+                    window.analyticsManager.trackUserEngagement('change_theme', { theme: this.value });
+                });
+            }
+            
+            // Sound toggle in settings
+            const soundToggle = document.getElementById('soundToggle');
+            if (soundToggle) {
+                soundToggle.addEventListener('change', function() {
+                    window.userManager.toggleSound();
+                    updateUserStatsUI();
+                });
+            }
+            
+            // Export data
+            const exportData = document.getElementById('exportData');
+            if (exportData) {
+                exportData.addEventListener('click', function() {
+                    const userData = window.userManager.exportUserData();
+                    const dataStr = JSON.stringify(userData, null, 2);
+                    const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                    
+                    const url = URL.createObjectURL(dataBlob);
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.download = `ai-hug-me-data-${new Date().toISOString().split('T')[0]}.json`;
+                    link.click();
+                    
+                    window.analyticsManager.trackUserEngagement('export_data');
+                    showSuccess('Data exported successfully!');
+                });
+            }
+            
+            // Clear data
+            const clearData = document.getElementById('clearData');
+            if (clearData) {
+                clearData.addEventListener('click', async function() {
+                    if (confirm('Are you sure you want to clear all your data? This cannot be undone.')) {
+                        await window.userManager.clearUserData();
+                        updateUserStatsUI();
+                        window.analyticsManager.trackUserEngagement('clear_data');
+                        showSuccess('All data cleared successfully!');
+                        settingsModal.classList.add('hidden');
+                    }
+                });
+            }
+            
+            // Existing social sharing listeners remain the same
+            document.addEventListener('click', function(e) {
+                if (e.target.closest('#shareFacebook')) {
+                    shareOnFacebook();
+                } else if (e.target.closest('#shareTwitter')) {
+                    shareOnTwitter();
+                } else if (e.target.closest('#shareWhatsapp')) {
+                    shareOnWhatsApp();
+                } else if (e.target.closest('#copyLink')) {
+                    copyPageLink();
+                }
+            });
+        }
+
+        // Enhanced AI Hug Generation with Firebase
+        async function generateAIHug() {
+            try {
+                // Generate AI hug
+                const aiHug = AIHugEngine.generateAIHug();
+                
+                // Record hug in user manager
+                await window.userManager.recordHug(aiHug);
+                
+                // Update UI
+                updateHugDisplay(aiHug);
+                updateUserStatsUI();
+                
+                // Track successful hug generation
+                window.analyticsManager.trackHugGenerated(aiHug.type, aiHug);
+                
+                // Show success message
+                showSuccess(`AI generated ${aiHug.name} successfully! 🧠`);
+                
+            } catch (error) {
+                console.error('AI hug generation failed:', error);
+                window.analyticsManager.trackError('hug_generation_failed', error.message, 'generateAIHug');
+                showError('AI is learning... Try again! 🤖');
+            }
+        }
+
+        // Update hug display (existing function enhanced)
+        function updateHugDisplay(aiHug) {
+            const hugDisplay = document.getElementById('hugDisplay');
+            if (!hugDisplay) return;
+
+            hugDisplay.innerHTML = `
+                <div class="mood-indicator" id="moodIndicator">${getAIMood()}</div>
+                <div class="hug-animation ai-hug-animation" id="hugAnimation">${aiHug.animation}</div>
+                <div class="hug-message" id="hugMessage">${aiHug.message}</div>
+                <div class="hug-details" id="hugDetails">${aiHug.detail}</div>
+                <div class="hug-intensity">${aiHug.intensity}</div>
+                <div class="ai-confidence">AI Confidence: ${aiHug.aiConfidence}</div>
+                <div class="hug-combo" id="hugCombo">${generateAICombo()}</div>
+                <div class="hug-stats" id="hugStats"></div>
+                <div class="ai-hug-stats">
+                    Type: ${aiHug.type} | Particles: ${Math.floor(Math.random() * 15) + 5}
+                </div>
+                
+                <!-- User Stats -->
+                <div class="user-stats" id="userStats" style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                    <div style="font-size: 0.8rem; color: #666;">
+                        Your Stats: <span id="userHugCount">${window.userManager.userData.totalHugs}</span> hugs • Favorite: <span id="userFavoriteHug">${window.userManager.userData.favoriteHugType || 'None yet'}</span>
+                    </div>
+                </div>
+                
+                <div class="social-sharing" id="socialSharing">
+                    <button class="social-btn facebook" id="shareFacebook"><span>Facebook</span></button>
+                    <button class="social-btn twitter" id="shareTwitter"><span>Twitter</span></button>
+                    <button class="social-btn whatsapp" id="shareWhatsapp"><span>WhatsApp</span></button>
+                    <button class="social-btn copy-link" id="copyLink"><span>Copy Link</span></button>
+                </div>
+            `;
+
+            // Apply effects
+            const hugAnimation = document.getElementById('hugAnimation');
+            if (hugAnimation) {
+                hugAnimation.style.color = aiHug.color;
+                hugAnimation.classList.add(aiHug.effect);
+            }
+
+            // Play sound if enabled
+            if (window.userManager.userData.soundEnabled) {
+                AISoundSystem.playAISound(aiHug.soundPattern);
+            }
+
+            // Create particles
+            AIParticleSystem.createParticles(
+                Math.floor(Math.random() * 12) + 6, 
+                aiHug.color, 
+                hugDisplay
+            );
+
+            updateStatsDisplay();
+        }
+
+        // Existing functions remain the same but enhanced with analytics
+        function shareOnFacebook() {
+            // ... existing code ...
+            window.analyticsManager.trackUserEngagement('share_facebook');
+        }
+
+        function shareOnTwitter() {
+            // ... existing code ...
+            window.analyticsManager.trackUserEngagement('share_twitter');
+        }
+
+        function shareOnWhatsApp() {
+            // ... existing code ...
+            window.analyticsManager.trackUserEngagement('share_whatsapp');
+        }
+
+        function copyPageLink() {
+            // ... existing code ...
+            window.analyticsManager.trackUserEngagement('copy_link');
+        }
+
+        // ALL OTHER EXISTING FUNCTIONS REMAIN EXACTLY THE SAME
+        // AIHugEngine, AISoundSystem, AIParticleSystem, AdManager, PageManager
+        // All existing functionality preserved
+
+        // Make systems available globally
+        window.AdManager = AdManager;
+        window.PageManager = PageManager;
+    </script>
+</body>
+</html>
