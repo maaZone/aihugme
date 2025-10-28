@@ -504,41 +504,46 @@ window.analyticsManager = {
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         // Track page view
-        window.analyticsManager.trackEvent('page_view', {
-            page_title: document.title,
-            page_location: window.location.href,
-            page_load_time: performance.timing ? 
-                (performance.timing.loadEventEnd - performance.timing.navigationStart) : 
-                'unknown'
-        });
-        
-        // Track user engagement
-        window.analyticsManager.trackEvent('user_engagement', {
-            screen_width: window.screen.width,
-            screen_height: window.screen.height,
-            language: navigator.language,
-            online: navigator.onLine
-        });
-        
+        if (window.analyticsManager) {
+            window.analyticsManager.trackEvent('page_view', {
+                page_title: document.title,
+                page_location: window.location.href,
+                page_load_time: performance.timing ? 
+                    (performance.timing.loadEventEnd - performance.timing.navigationStart) : 
+                    'unknown'
+            });
+            
+            // Track user engagement
+            window.analyticsManager.trackEvent('user_engagement', {
+                screen_width: window.screen.width,
+                screen_height: window.screen.height,
+                language: navigator.language,
+                online: navigator.onLine
+            });
+        }
     }, 1000);
 });
 
 // Track errors
 window.addEventListener('error', function(e) {
-    window.analyticsManager.trackEvent('error_occurred', {
-        error_message: e.message,
-        error_file: e.filename,
-        error_line: e.lineno,
-        error_column: e.colno
-    });
+    if (window.analyticsManager) {
+        window.analyticsManager.trackEvent('error_occurred', {
+            error_message: e.message,
+            error_file: e.filename,
+            error_line: e.lineno,
+            error_column: e.colno
+        });
+    }
 });
 
 // Track page visibility changes
 document.addEventListener('visibilitychange', function() {
-    if (document.visibilityState === 'visible') {
-        window.analyticsManager.trackEvent('page_visible');
-    } else {
-        window.analyticsManager.trackEvent('page_hidden');
+    if (window.analyticsManager) {
+        if (document.visibilityState === 'visible') {
+            window.analyticsManager.trackEvent('page_visible');
+        } else {
+            window.analyticsManager.trackEvent('page_hidden');
+        }
     }
 });
 
