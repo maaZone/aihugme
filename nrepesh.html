@@ -1064,7 +1064,7 @@
                     </div>
                     <div class="stat-card">
                         <div class="stat-label">Avg. Session Time</div>
-                        <div class="stat-value" id="avgSessionTime">0s</div>
+                        <div class="stat-value" id="avgSessionTime">0 min</div>
                     </div>
                 </div>
                 
@@ -2031,13 +2031,13 @@
                 document.getElementById('totalHugs').textContent = stats.totalHugs;
                 document.getElementById('activeUsers').textContent = stats.liveUsers || Math.floor(Math.random() * 50) + 10;
                 document.getElementById('todayRevenue').textContent = '$' + (Math.random() * 50 + 10).toFixed(2);
-                document.getElementById('avgSessionTime').textContent = stats.avgSessionDuration + 's';
+                document.getElementById('avgSessionTime').textContent = stats.avgSessionDuration + ' min';
             } else {
                 // Fallback to demo data
                 document.getElementById('totalHugs').textContent = Math.floor(Math.random() * 1000) + 500;
                 document.getElementById('activeUsers').textContent = Math.floor(Math.random() * 50) + 10;
                 document.getElementById('todayRevenue').textContent = '$' + (Math.random() * 50 + 10).toFixed(2);
-                document.getElementById('avgSessionTime').textContent = Math.floor(Math.random() * 120 + 30) + 's';
+                document.getElementById('avgSessionTime').textContent = Math.floor(Math.random() * 5) + 1 + ' min';
             }
             
             // Update real-time chart with new data
