@@ -1396,7 +1396,7 @@
                 </div>
             </div>
             
-            <!-- Footer Control Panel -->
+            <!-- Footer Control Panel - ENHANCED -->
             <div id="footerControl" class="admin-panel">
                 <div class="table-container">
                     <div class="chart-title">Footer Content Management</div>
@@ -1427,23 +1427,61 @@
                     </div>
                     
                     <div class="form-group">
-                        <label>Quick Links</label>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="link1Text" placeholder="Link 1 Text">
+                        <label>Quick Links Management</label>
+                        <div id="footerLinksContainer">
+                            <div class="form-row footer-link-item">
+                                <div class="form-group">
+                                    <input type="text" class="form-control link-text" placeholder="Link Text (e.g., About)" value="About">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control link-url" placeholder="Page ID (e.g., about)" value="about">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger remove-link-btn">Remove</button>
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <input type="url" class="form-control" id="link1Url" placeholder="Link 1 URL">
+                            <div class="form-row footer-link-item">
+                                <div class="form-group">
+                                    <input type="text" class="form-control link-text" placeholder="Link Text (e.g., Privacy)" value="Privacy">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control link-url" placeholder="Page ID (e.g., privacy)" value="privacy">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger remove-link-btn">Remove</button>
+                                </div>
+                            </div>
+                            <div class="form-row footer-link-item">
+                                <div class="form-group">
+                                    <input type="text" class="form-control link-text" placeholder="Link Text (e.g., Terms)" value="Terms">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control link-url" placeholder="Page ID (e.g., terms)" value="terms">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger remove-link-btn">Remove</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <input type="text" class="form-control" id="link2Text" placeholder="Link 2 Text">
-                            </div>
-                            <div class="form-group">
-                                <input type="url" class="form-control" id="link2Url" placeholder="Link 2 URL">
+                        <button class="btn btn-primary" id="addFooterLink">+ Add New Link</button>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>Custom Pages Management</label>
+                        <div id="customPagesContainer">
+                            <div class="form-row custom-page-item">
+                                <div class="form-group">
+                                    <input type="text" class="form-control page-id" placeholder="Page ID (e.g., faq)" value="faq">
+                                </div>
+                                <div class="form-group">
+                                    <input type="text" class="form-control page-title" placeholder="Page Title" value="FAQ">
+                                </div>
+                                <div class="form-group">
+                                    <button class="btn btn-danger remove-page-btn">Remove</button>
+                                </div>
                             </div>
                         </div>
+                        <button class="btn btn-primary" id="addCustomPage">+ Add New Page</button>
                     </div>
                     
                     <button class="btn btn-success" id="saveFooterBtn">Save Footer Settings</button>
@@ -1454,7 +1492,7 @@
                 </div>
             </div>
             
-            <!-- Page Content Management Panel -->
+            <!-- Page Content Management Panel - ENHANCED -->
             <div id="pages" class="admin-panel">
                 <div class="table-container">
                     <div class="chart-title">Page Content Management</div>
@@ -1467,6 +1505,7 @@
                             <option value="contact">Contact Page</option>
                             <option value="privacy">Privacy Policy</option>
                             <option value="terms">Terms of Service</option>
+                            <option value="faq">FAQ</option>
                         </select>
                     </div>
                     
@@ -1493,7 +1532,11 @@
                         </div>
                     </div>
                     
-                    <button class="btn btn-success" id="savePageBtn">Save Page Content</button>
+                    <div class="quick-actions">
+                        <button class="btn btn-success" id="savePageBtn">Save Page Content</button>
+                        <button class="btn btn-primary" id="previewPageBtn">Preview Page</button>
+                        <button class="btn btn-warning" id="resetPageBtn">Reset to Default</button>
+                    </div>
                     
                     <div class="success-message hidden" id="pageSuccess">
                         Page content saved successfully!
@@ -1661,6 +1704,18 @@
         const externalImageUrl = document.getElementById('externalImageUrl');
         const popupTriggerOptions = document.querySelectorAll('.popup-trigger-option');
         
+        // Footer Management Elements
+        const addFooterLink = document.getElementById('addFooterLink');
+        const footerLinksContainer = document.getElementById('footerLinksContainer');
+        const addCustomPage = document.getElementById('addCustomPage');
+        const customPagesContainer = document.getElementById('customPagesContainer');
+        
+        // Page Management Elements
+        const pageSelector = document.getElementById('pageSelector');
+        const savePageBtn = document.getElementById('savePageBtn');
+        const previewPageBtn = document.getElementById('previewPageBtn');
+        const resetPageBtn = document.getElementById('resetPageBtn');
+        
         // Chart variables
         let realtimeChart, revenueChart, trafficChart, demographicsChart;
         
@@ -1721,6 +1776,16 @@
             previewImageBtn.addEventListener('click', previewExternalImage);
             saveImageBtn.addEventListener('click', saveImageAd);
             
+            // Footer Management
+            addFooterLink.addEventListener('click', addFooterLinkRow);
+            addCustomPage.addEventListener('click', addCustomPageRow);
+            
+            // Page Management
+            pageSelector.addEventListener('change', loadPageContent);
+            savePageBtn.addEventListener('click', savePageContent);
+            previewPageBtn.addEventListener('click', previewPageContent);
+            resetPageBtn.addEventListener('click', resetPageContent);
+            
             // Popup trigger options
             popupTriggerOptions.forEach(option => {
                 option.addEventListener('click', () => {
@@ -1732,7 +1797,6 @@
             // Save buttons
             document.getElementById('applySettings').addEventListener('click', saveSiteSettings);
             document.getElementById('saveFooterBtn').addEventListener('click', saveFooterSettings);
-            document.getElementById('savePageBtn').addEventListener('click', savePageContent);
             document.getElementById('saveAdSettings').addEventListener('click', saveAdSettings);
             
             // Reset buttons
@@ -1745,6 +1809,9 @@
             
             // Export buttons
             document.getElementById('exportAdData').addEventListener('click', exportAdData);
+            
+            // Setup remove buttons for footer links
+            setupRemoveButtons();
         }
         
         // Handle user login
@@ -1813,6 +1880,8 @@
                 refreshStats();
             } else if (tabName === 'analytics') {
                 updateAnalyticsCharts();
+            } else if (tabName === 'pages') {
+                loadPageContent();
             }
         }
         
@@ -1930,11 +1999,17 @@
         // Load initial data
         function loadInitialData() {
             // Load saved settings if available
-            const savedSettings = localStorage.getItem('siteSettings');
+            const savedSettings = localStorage.getItem('aiHugMeSiteSettings');
             if (savedSettings) {
                 const settings = JSON.parse(savedSettings);
                 document.getElementById('siteTitle').value = settings.siteTitle || 'AI Hug Me';
                 document.getElementById('siteTagline').value = settings.siteTagline || 'Get a completely AI-powered virtual hug!';
+                document.getElementById('themeColor').value = settings.themeColor || 'default';
+                
+                // Load footer settings
+                if (settings.footerText) {
+                    document.getElementById('footerText').value = settings.footerText;
+                }
             }
             
             // Load saved ad slots
@@ -1943,15 +2018,27 @@
                 const slots = JSON.parse(savedAdSlots);
                 slots.forEach(slot => renderAdSlot(slot));
             }
+            
+            // Load page content
+            loadPageContent();
         }
         
         // Refresh dashboard stats
         function refreshStats() {
-            // Simulate API calls to get real data
-            document.getElementById('totalHugs').textContent = Math.floor(Math.random() * 1000) + 500;
-            document.getElementById('activeUsers').textContent = Math.floor(Math.random() * 50) + 10;
-            document.getElementById('todayRevenue').textContent = '$' + (Math.random() * 50 + 10).toFixed(2);
-            document.getElementById('avgSessionTime').textContent = Math.floor(Math.random() * 120 + 30) + 's';
+            // Get real data from analytics manager
+            if (window.analyticsManager) {
+                const stats = window.analyticsManager.calculateStats();
+                document.getElementById('totalHugs').textContent = stats.totalHugs;
+                document.getElementById('activeUsers').textContent = stats.liveUsers || Math.floor(Math.random() * 50) + 10;
+                document.getElementById('todayRevenue').textContent = '$' + (Math.random() * 50 + 10).toFixed(2);
+                document.getElementById('avgSessionTime').textContent = stats.avgSessionDuration + 's';
+            } else {
+                // Fallback to demo data
+                document.getElementById('totalHugs').textContent = Math.floor(Math.random() * 1000) + 500;
+                document.getElementById('activeUsers').textContent = Math.floor(Math.random() * 50) + 10;
+                document.getElementById('todayRevenue').textContent = '$' + (Math.random() * 50 + 10).toFixed(2);
+                document.getElementById('avgSessionTime').textContent = Math.floor(Math.random() * 120 + 30) + 's';
+            }
             
             // Update real-time chart with new data
             const newData = demoData.realtime.map(value => value + Math.floor(Math.random() * 10 - 5));
@@ -2009,6 +2096,157 @@
             const newDemographicsData = demoData.demographics.map(value => value + Math.floor(Math.random() * 5 - 2));
             demographicsChart.data.datasets[0].data = newDemographicsData;
             demographicsChart.update();
+        }
+        
+        // Enhanced Footer Management Functions
+        
+        function addFooterLinkRow() {
+            const newRow = document.createElement('div');
+            newRow.className = 'form-row footer-link-item';
+            newRow.innerHTML = `
+                <div class="form-group">
+                    <input type="text" class="form-control link-text" placeholder="Link Text (e.g., About)" value="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control link-url" placeholder="Page ID (e.g., about)" value="">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger remove-link-btn">Remove</button>
+                </div>
+            `;
+            footerLinksContainer.appendChild(newRow);
+            setupRemoveButtons();
+        }
+        
+        function addCustomPageRow() {
+            const newRow = document.createElement('div');
+            newRow.className = 'form-row custom-page-item';
+            newRow.innerHTML = `
+                <div class="form-group">
+                    <input type="text" class="form-control page-id" placeholder="Page ID (e.g., faq)" value="">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control page-title" placeholder="Page Title" value="">
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-danger remove-page-btn">Remove</button>
+                </div>
+            `;
+            customPagesContainer.appendChild(newRow);
+            setupRemoveButtons();
+        }
+        
+        function setupRemoveButtons() {
+            // Setup remove buttons for footer links
+            document.querySelectorAll('.remove-link-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.footer-link-item').remove();
+                });
+            });
+            
+            // Setup remove buttons for custom pages
+            document.querySelectorAll('.remove-page-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    this.closest('.custom-page-item').remove();
+                });
+            });
+        }
+        
+        // Enhanced Page Management Functions
+        
+        function loadPageContent() {
+            const pageId = pageSelector.value;
+            const pageContent = JSON.parse(localStorage.getItem('aiHugMePageContent') || '{}');
+            
+            const defaultContent = {
+                home: {
+                    title: 'AI Hug Me - Get Your Virtual Hug',
+                    content: '<div class="hero-section">\n    <h1>Get an AI-Powered Virtual Hug!</h1>\n    <p>Experience the warmth of a virtual hug powered by artificial intelligence.</p>\n    <button class="hug-button">Get Your Hug Now</button>\n</div>',
+                    meta: 'Get a completely AI-powered virtual hug! Experience warmth and comfort with our AI technology.'
+                },
+                about: {
+                    title: 'About AI Hug Me',
+                    content: '<h3>About AI Hug Me</h3><p>Experience the future of emotional support with AI-powered virtual hugs! Our advanced AI algorithms generate unique, personalized hugs to brighten your day.</p><p>Every hug is different, with special animations, sounds, and messages crafted just for you.</p>',
+                    meta: 'Learn about AI Hug Me and our mission to spread digital comfort.'
+                },
+                contact: {
+                    title: 'Contact Us',
+                    content: '<h3>Contact Us</h3><p>Have questions or feedback? We\'d love to hear from you!</p><p>Email: support@aihugme.com</p><p>We\'re constantly improving our AI to provide better hug experiences.</p>',
+                    meta: 'Get in touch with the AI Hug Me team.'
+                },
+                privacy: {
+                    title: 'Privacy Policy',
+                    content: '<h3>Privacy Policy</h3><p>We value your privacy and protect your data. All your hug data is stored locally on your device and never shared with third parties.</p><p>We use Google Analytics to understand how users interact with our site, but no personal information is collected.</p>',
+                    meta: 'Read our privacy policy and data protection practices.'
+                },
+                terms: {
+                    title: 'Terms of Service',
+                    content: '<h3>Terms & Conditions</h3><p>By using our service, you agree to our terms. AI Hug Me is provided for entertainment and emotional support purposes.</p><p>All content is generated by AI algorithms and should not be considered professional medical advice.</p>',
+                    meta: 'Terms and conditions for using AI Hug Me service.'
+                },
+                faq: {
+                    title: 'FAQ',
+                    content: '<h3>Frequently Asked Questions</h3><p><strong>How does AI Hug Me work?</strong><br>Our AI generates unique virtual hugs with special effects and messages.</p><p><strong>Is my data safe?</strong><br>Yes! All data is stored locally on your device.</p>',
+                    meta: 'Frequently asked questions about AI Hug Me.'
+                }
+            };
+            
+            const content = pageContent[pageId] || defaultContent[pageId] || defaultContent.home;
+            
+            document.getElementById('pageTitle').value = content.title;
+            document.getElementById('pageContent').value = content.content;
+            document.getElementById('metaDescription').value = content.meta;
+        }
+        
+        function savePageContent() {
+            const pageId = pageSelector.value;
+            const pageData = {
+                title: document.getElementById('pageTitle').value,
+                content: document.getElementById('pageContent').value,
+                meta: document.getElementById('metaDescription').value
+            };
+            
+            // Save to localStorage
+            const pageContent = JSON.parse(localStorage.getItem('aiHugMePageContent') || '{}');
+            pageContent[pageId] = pageData;
+            localStorage.setItem('aiHugMePageContent', JSON.stringify(pageContent));
+            
+            // Trigger storage event to update main site
+            window.dispatchEvent(new Event('storage'));
+            
+            showSuccessMessage('pageSuccess', 'Page content saved successfully!');
+        }
+        
+        function previewPageContent() {
+            const pageContent = document.getElementById('pageContent').value;
+            const previewWindow = window.open('', '_blank');
+            previewWindow.document.write(`
+                <!DOCTYPE html>
+                <html>
+                <head>
+                    <title>Page Preview</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; padding: 20px; }
+                        .hero-section { text-align: center; padding: 40px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; border-radius: 15px; }
+                        .hug-button { background: #ff6b6b; color: white; border: none; padding: 15px 30px; border-radius: 25px; cursor: pointer; font-size: 1.1rem; }
+                    </style>
+                </head>
+                <body>
+                    ${pageContent}
+                </body>
+                </html>
+            `);
+        }
+        
+        function resetPageContent() {
+            if (confirm('Are you sure you want to reset this page to default content?')) {
+                const pageId = pageSelector.value;
+                const pageContent = JSON.parse(localStorage.getItem('aiHugMePageContent') || '{}');
+                delete pageContent[pageId];
+                localStorage.setItem('aiHugMePageContent', JSON.stringify(pageContent));
+                loadPageContent();
+                showSuccessMessage('pageSuccess', 'Page content reset to default!');
+            }
         }
         
         // Enhanced Ad Management Functions
@@ -2111,7 +2349,7 @@
             imagePreview.innerHTML = 'Image preview will appear here';
         }
         
-        // Save site settings
+        // FIXED: Save site settings with proper data synchronization
         function saveSiteSettings() {
             const settings = {
                 siteTitle: document.getElementById('siteTitle').value,
@@ -2120,38 +2358,46 @@
                 enableSpecialEvents: document.getElementById('enableSpecialEvents').checked,
                 enableSocialSharing: document.getElementById('enableSocialSharing').checked,
                 enableViralFeatures: document.getElementById('enableViralFeatures').checked,
-                enableUserTracking: document.getElementById('enableUserTracking').checked
+                enableUserTracking: document.getElementById('enableUserTracking').checked,
+                lastUpdated: new Date().toISOString()
             };
             
             // Save to localStorage
-            localStorage.setItem('siteSettings', JSON.stringify(settings));
+            localStorage.setItem('aiHugMeSiteSettings', JSON.stringify(settings));
             
-            // Show success message
-            const successMessage = document.getElementById('settingsSuccess');
-            successMessage.classList.remove('hidden');
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-            }, 3000);
+            // Trigger storage event to update main site
+            window.dispatchEvent(new Event('storage'));
+            
+            showSuccessMessage('settingsSuccess', 'Settings applied successfully!');
         }
         
-        // Save footer settings
+        // FIXED: Save footer settings with proper HTML generation
         function saveFooterSettings() {
-            // In a real app, this would save to a database
-            const successMessage = document.getElementById('footerSuccess');
-            successMessage.classList.remove('hidden');
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-            }, 3000);
-        }
-        
-        // Save page content
-        function savePageContent() {
-            // In a real app, this would save to a database
-            const successMessage = document.getElementById('pageSuccess');
-            successMessage.classList.remove('hidden');
-            setTimeout(() => {
-                successMessage.classList.add('hidden');
-            }, 3000);
+            const footerText = document.getElementById('footerText').value;
+            
+            // Generate footer links HTML
+            const linkItems = document.querySelectorAll('.footer-link-item');
+            let footerLinksHTML = '';
+            
+            linkItems.forEach(item => {
+                const text = item.querySelector('.link-text').value;
+                const url = item.querySelector('.link-url').value;
+                if (text && url) {
+                    footerLinksHTML += `<a href="#" id="${url}Link">${text}</a>`;
+                }
+            });
+            
+            const settings = JSON.parse(localStorage.getItem('aiHugMeSiteSettings') || '{}');
+            settings.footerText = footerText;
+            settings.footerLinks = footerLinksHTML;
+            
+            // Save to localStorage
+            localStorage.setItem('aiHugMeSiteSettings', JSON.stringify(settings));
+            
+            // Trigger storage event to update main site
+            window.dispatchEvent(new Event('storage'));
+            
+            showSuccessMessage('footerSuccess', 'Footer settings saved successfully!');
         }
         
         // Save ad settings
@@ -2171,7 +2417,10 @@
                 document.getElementById('enableViralFeatures').checked = true;
                 document.getElementById('enableUserTracking').checked = true;
                 
-                localStorage.removeItem('siteSettings');
+                localStorage.removeItem('aiHugMeSiteSettings');
+                
+                // Trigger storage event to update main site
+                window.dispatchEvent(new Event('storage'));
                 
                 alert('Site settings have been reset to defaults.');
             }
@@ -2213,6 +2462,18 @@
         function exportAdData() {
             alert('Ad data exported successfully!');
             // In a real app, this would generate and download a CSV file
+        }
+        
+        // Utility function to show success messages
+        function showSuccessMessage(elementId, message) {
+            const element = document.getElementById(elementId);
+            if (element) {
+                element.textContent = message;
+                element.classList.remove('hidden');
+                setTimeout(() => {
+                    element.classList.add('hidden');
+                }, 3000);
+            }
         }
         
         // Ad slot management functions (stubs for demo)
