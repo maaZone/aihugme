@@ -7,12 +7,12 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     
     <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MX5E36LSJ8"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
+      gtag('config', 'G-MX5E36LSJ8');
     </script>
     
     <style>
@@ -550,8 +550,8 @@
             100% { transform: rotate(360deg); }
         }
         
-        /* Enhanced Footer Management */
-        .footer-management {
+        /* Enhanced Ad Management Styles */
+        .ad-management {
             background: white;
             border-radius: 12px;
             padding: 20px;
@@ -559,14 +559,14 @@
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
         }
         
-        .footer-link-editor {
+        .ad-slot-editor {
             background: #f8f9fa;
             border-radius: 8px;
             padding: 15px;
             margin: 10px 0;
         }
         
-        .footer-link-item {
+        .ad-slot-item {
             display: flex;
             gap: 10px;
             align-items: center;
@@ -577,19 +577,19 @@
             border: 1px solid #ddd;
         }
         
-        .footer-link-inputs {
+        .ad-slot-inputs {
             flex: 1;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr 1fr;
             gap: 10px;
         }
         
-        .footer-link-actions {
+        .ad-slot-actions {
             display: flex;
             gap: 5px;
         }
         
-        .footer-preview {
+        .ad-preview {
             background: #f8f9fa;
             border: 2px dashed #6a11cb;
             border-radius: 8px;
@@ -597,9 +597,136 @@
             margin: 10px 0;
         }
         
-        .footer-preview h4 {
+        .ad-preview h4 {
             color: #6a11cb;
             margin-bottom: 10px;
+        }
+        
+        .revenue-source-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+            border-left: 4px solid var(--secondary);
+        }
+        
+        .revenue-source-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .revenue-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .revenue-stat {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        
+        .revenue-value {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: var(--success);
+        }
+        
+        .revenue-label {
+            font-size: 0.8rem;
+            color: #666;
+        }
+        
+        .ad-schedule-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 12px;
+        }
+        
+        .schedule-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        
+        .schedule-dates {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        
+        .popup-settings {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .popup-trigger-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .popup-trigger-option {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
+            cursor: pointer;
+        }
+        
+        .popup-trigger-option.active {
+            border-color: var(--secondary);
+            background: rgba(106, 17, 203, 0.1);
+        }
+        
+        .image-preview-container {
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .image-preview {
+            max-width: 100%;
+            max-height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 5px;
+        }
+        
+        .ad-rotation-settings {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+        
+        .rotation-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: white;
+            border-radius: 5px;
+        }
+        
+        .rotation-weight {
+            width: 60px;
+        }
+        
+        .rotation-preview {
+            flex: 1;
         }
         
         /* Mobile-First Responsive Design */
@@ -673,18 +800,30 @@
                 grid-template-columns: 1fr 1fr;
             }
             
-            .footer-link-inputs {
+            .ad-slot-inputs {
                 grid-template-columns: 1fr;
             }
             
-            .footer-link-item {
+            .ad-slot-item {
                 flex-direction: column;
                 align-items: stretch;
             }
             
-            .footer-link-actions {
+            .ad-slot-actions {
                 justify-content: center;
                 margin-top: 10px;
+            }
+            
+            .popup-trigger-options {
+                grid-template-columns: 1fr;
+            }
+            
+            .schedule-dates {
+                grid-template-columns: 1fr;
+            }
+            
+            .revenue-stats {
+                grid-template-columns: 1fr 1fr;
             }
         }
         
@@ -711,8 +850,12 @@
                 grid-template-columns: repeat(4, 1fr);
             }
             
-            .footer-link-inputs {
-                grid-template-columns: 1fr 1fr;
+            .ad-slot-inputs {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+            
+            .popup-trigger-options {
+                grid-template-columns: 1fr 1fr 1fr;
             }
         }
         
@@ -877,6 +1020,7 @@
             <div class="nav-tabs" id="navTabs">
                 <div class="nav-tab active" data-tab="dashboard">📊 Dashboard</div>
                 <div class="nav-tab" data-tab="siteControl">⚙️ Site Control</div>
+                <div class="nav-tab" data-tab="adManagement">💰 Ad Management</div>
                 <div class="nav-tab" data-tab="footerControl">🦶 Footer Control</div>
                 <div class="nav-tab" data-tab="pages">📄 Page Content</div>
                 <div class="nav-tab" data-tab="analytics">📈 Analytics</div>
@@ -892,14 +1036,14 @@
                     <div class="quick-action-btn" onclick="switchTab('siteControl')">
                         ⚙️ Site Settings
                     </div>
+                    <div class="quick-action-btn" onclick="switchTab('adManagement')">
+                        💰 Ad Management
+                    </div>
                     <div class="quick-action-btn" onclick="switchTab('footerControl')">
                         🦶 Footer Settings
                     </div>
                     <div class="quick-action-btn" onclick="refreshStats()">
                         🔄 Refresh Stats
-                    </div>
-                    <div class="quick-action-btn" onclick="exportReport()">
-                        📊 Export Report
                     </div>
                 </div>
                 
@@ -1006,38 +1150,303 @@
                 </div>
             </div>
             
-            <!-- Footer Control Panel - NEW -->
-            <div id="footerControl" class="admin-panel">
-                <div class="footer-management">
-                    <div class="chart-title">Footer Management System</div>
+            <!-- Enhanced Ad Management Panel -->
+            <div id="adManagement" class="admin-panel">
+                <div class="ad-management">
+                    <div class="chart-title">💰 Enterprise Ad Management System</div>
                     
                     <div class="auto-activate-notice">
-                        ✅ <strong>FOOTER CONTROL:</strong> Manage footer links and text that appear on the main website!
+                        ✅ <strong>AD MANAGEMENT:</strong> Complete control over all revenue sources and ad placements!
                     </div>
+                    
+                    <!-- Revenue Sources Management -->
+                    <div class="form-group">
+                        <label>Revenue Sources Configuration</label>
+                        <div class="revenue-source-item">
+                            <div class="revenue-source-header">
+                                <h4>Google AdSense</h4>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                            <div class="form-group">
+                                <label>AdSense Publisher ID</label>
+                                <input type="text" class="form-control" id="adsensePublisherId" placeholder="pub-XXXXXXXXXXXX">
+                            </div>
+                            <div class="revenue-stats">
+                                <div class="revenue-stat">
+                                    <div class="revenue-value">$12.45</div>
+                                    <div class="revenue-label">Today</div>
+                                </div>
+                                <div class="revenue-stat">
+                                    <div class="revenue-value">$89.23</div>
+                                    <div class="revenue-label">This Week</div>
+                                </div>
+                                <div class="revenue-stat">
+                                    <div class="revenue-value">$342.67</div>
+                                    <div class="revenue-label">This Month</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="revenue-source-item">
+                            <div class="revenue-source-header">
+                                <h4>Direct Ads</h4>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Default CPM Rate</label>
+                                <input type="number" class="form-control" id="defaultCpmRate" value="2.50" step="0.01">
+                            </div>
+                            <div class="form-group">
+                                <label>Direct Advertisers</label>
+                                <textarea class="form-control" id="directAdvertisers" placeholder="List of direct advertisers..."></textarea>
+                            </div>
+                        </div>
+                        
+                        <div class="revenue-source-item">
+                            <div class="revenue-source-header">
+                                <h4>Affiliate Marketing</h4>
+                                <span class="badge badge-warning">Setup Required</span>
+                            </div>
+                            <div class="form-group">
+                                <label>Affiliate Networks</label>
+                                <select class="form-control" id="affiliateNetworks" multiple>
+                                    <option value="amazon">Amazon Associates</option>
+                                    <option value="clickbank">ClickBank</option>
+                                    <option value="cj">Commission Junction</option>
+                                    <option value="shareasale">ShareASale</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Ad Slot Management -->
+                    <div class="form-group">
+                        <label>Dynamic Ad Slot Management</label>
+                        <div class="ad-slot-editor">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>Slot Name</label>
+                                    <input type="text" class="form-control" id="slotName" placeholder="Header Banner">
+                                </div>
+                                <div class="form-group">
+                                    <label>Slot Type</label>
+                                    <select class="form-control" id="slotType">
+                                        <option value="header">Header Banner</option>
+                                        <option value="sidebar">Sidebar</option>
+                                        <option value="footer">Footer</option>
+                                        <option value="in-content">In-Content</option>
+                                        <option value="popup">Popup</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Dimensions</label>
+                                    <input type="text" class="form-control" id="slotDimensions" placeholder="728x90">
+                                </div>
+                            </div>
+                            
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label>CPM Rate ($)</label>
+                                    <input type="number" class="form-control" id="slotCpmRate" value="3.50" step="0.01">
+                                </div>
+                                <div class="form-group">
+                                    <label>Priority</label>
+                                    <select class="form-control" id="slotPriority">
+                                        <option value="high">High</option>
+                                        <option value="medium" selected>Medium</option>
+                                        <option value="low">Low</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Status</label>
+                                    <select class="form-control" id="slotStatus">
+                                        <option value="active">Active</option>
+                                        <option value="inactive">Inactive</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <button class="btn btn-success" id="addSlotBtn">Add Ad Slot</button>
+                        </div>
+                        
+                        <div class="ad-slots-container" id="adSlotsContainer">
+                            <!-- Ad slots will be dynamically added here -->
+                        </div>
+                    </div>
+                    
+                    <!-- External Image Link Management -->
+                    <div class="form-group">
+                        <label>External Image Link Management</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Image URL</label>
+                                <input type="url" class="form-control" id="externalImageUrl" placeholder="https://example.com/image.jpg">
+                            </div>
+                            <div class="form-group">
+                                <label>Destination URL</label>
+                                <input type="url" class="form-control" id="destinationUrl" placeholder="https://example.com">
+                            </div>
+                        </div>
+                        
+                        <div class="image-preview-container">
+                            <div class="image-preview" id="imagePreview">
+                                Image preview will appear here
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-primary" id="previewImageBtn">Preview Image</button>
+                            <button class="btn btn-success" id="saveImageBtn">Save Image Ad</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Ad Scheduling -->
+                    <div class="form-group">
+                        <label>Ad Scheduling & Rotation</label>
+                        <div class="ad-schedule-item">
+                            <div class="schedule-header">
+                                <h4>Schedule Settings</h4>
+                                <span class="badge badge-success">Active</span>
+                            </div>
+                            <div class="schedule-dates">
+                                <div class="form-group">
+                                    <label>Start Date/Time</label>
+                                    <input type="datetime-local" class="form-control" id="scheduleStart">
+                                </div>
+                                <div class="form-group">
+                                    <label>End Date/Time</label>
+                                    <input type="datetime-local" class="form-control" id="scheduleEnd">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Rotation Type</label>
+                                <select class="form-control" id="rotationType">
+                                    <option value="equal">Equal Rotation</option>
+                                    <option value="weighted">Weighted Rotation</option>
+                                    <option value="priority">Priority-based</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Popup Ad Management -->
+                    <div class="form-group">
+                        <label>Popup Ad Management</label>
+                        <div class="popup-settings">
+                            <div class="form-group">
+                                <label>Popup Trigger</label>
+                                <div class="popup-trigger-options">
+                                    <div class="popup-trigger-option active" data-trigger="entry">
+                                        Entry Popup
+                                    </div>
+                                    <div class="popup-trigger-option" data-trigger="exit-intent">
+                                        Exit-Intent Popup
+                                    </div>
+                                    <div class="popup-trigger-option" data-trigger="timed">
+                                        Timed Popup
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Popup Delay (seconds)</label>
+                                <input type="number" class="form-control" id="popupDelay" value="5" min="0">
+                            </div>
+                            
+                            <div class="form-group">
+                                <label>Frequency Capping (per user)</label>
+                                <input type="number" class="form-control" id="popupFrequency" value="1" min="1">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Revenue Analytics -->
+                    <div class="form-group">
+                        <label>Revenue Analytics Dashboard</label>
+                        <div class="chart-container">
+                            <div class="chart-title">Revenue Sources Breakdown</div>
+                            <canvas id="revenueChart"></canvas>
+                        </div>
+                        
+                        <div class="revenue-stats">
+                            <div class="revenue-stat">
+                                <div class="revenue-value">$342.67</div>
+                                <div class="revenue-label">Total Revenue</div>
+                            </div>
+                            <div class="revenue-stat">
+                                <div class="revenue-value">$12.45</div>
+                                <div class="revenue-label">Today</div>
+                            </div>
+                            <div class="revenue-stat">
+                                <div class="revenue-value">3.2%</div>
+                                <div class="revenue-label">CTR</div>
+                            </div>
+                            <div class="revenue-stat">
+                                <div class="revenue-value">$8.76</div>
+                                <div class="revenue-label">RPM</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="quick-actions">
+                        <button class="btn btn-success" id="saveAdSettings">Save All Settings</button>
+                        <button class="btn btn-primary" id="exportAdData">Export Data</button>
+                        <button class="btn btn-warning" id="resetAdSettings">Reset to Defaults</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Footer Control Panel -->
+            <div id="footerControl" class="admin-panel">
+                <div class="table-container">
+                    <div class="chart-title">Footer Content Management</div>
                     
                     <div class="form-group">
                         <label>Footer Text</label>
-                        <input type="text" class="form-control" id="footerText" value="© 2025 AI Hug Me. All Rights Reserved.">
+                        <textarea class="form-control" id="footerText" rows="3">© 2023 AI Hug Me. All rights reserved. Made with ❤️ by Nrepesh</textarea>
                     </div>
                     
                     <div class="form-group">
-                        <label>Footer Links Management</label>
-                        <div class="footer-link-editor">
-                            <div id="footerLinksContainer">
-                                <!-- Footer links will be dynamically added here -->
+                        <label>Social Media Links</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="url" class="form-control" id="facebookUrl" placeholder="Facebook URL">
                             </div>
-                            <button class="btn btn-sm btn-success" onclick="addFooterLink()">+ Add Link</button>
+                            <div class="form-group">
+                                <input type="url" class="form-control" id="twitterUrl" placeholder="Twitter URL">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="url" class="form-control" id="instagramUrl" placeholder="Instagram URL">
+                            </div>
+                            <div class="form-group">
+                                <input type="url" class="form-control" id="linkedinUrl" placeholder="LinkedIn URL">
+                            </div>
                         </div>
                     </div>
                     
-                    <div class="footer-preview">
-                        <h4>Footer Preview</h4>
-                        <div id="footerPreview">
-                            <!-- Preview will be shown here -->
+                    <div class="form-group">
+                        <label>Quick Links</label>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="link1Text" placeholder="Link 1 Text">
+                            </div>
+                            <div class="form-group">
+                                <input type="url" class="form-control" id="link1Url" placeholder="Link 1 URL">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="link2Text" placeholder="Link 2 Text">
+                            </div>
+                            <div class="form-group">
+                                <input type="url" class="form-control" id="link2Url" placeholder="Link 2 URL">
+                            </div>
                         </div>
                     </div>
                     
-                    <button class="btn btn-success" id="saveFooterSettings" style="width: 100%;">Save Footer Settings</button>
+                    <button class="btn btn-success" id="saveFooterBtn">Save Footer Settings</button>
                     
                     <div class="success-message hidden" id="footerSuccess">
                         Footer settings saved successfully!
@@ -1050,131 +1459,180 @@
                 <div class="table-container">
                     <div class="chart-title">Page Content Management</div>
                     
-                    <div class="quick-actions">
-                        <div class="quick-action-btn" onclick="loadAllPages()">
-                            📥 Load All Pages
-                        </div>
-                        <div class="quick-action-btn" onclick="saveAllPages()">
-                            💾 Save All Pages
-                        </div>
-                        <div class="quick-action-btn" onclick="resetPages()">
-                            🔄 Reset to Default
-                        </div>
-                        <div class="quick-action-btn" onclick="previewPages()">
-                            👁️ Preview
-                        </div>
-                    </div>
-                    
                     <div class="form-group">
-                        <label>About Page Content</label>
-                        <div class="page-editor">
-                            <textarea id="aboutPageContent" placeholder="Enter about page content here... (HTML supported)"></textarea>
+                        <label>Select Page</label>
+                        <select class="form-control" id="pageSelector">
+                            <option value="home">Home Page</option>
+                            <option value="about">About Page</option>
+                            <option value="contact">Contact Page</option>
+                            <option value="privacy">Privacy Policy</option>
+                            <option value="terms">Terms of Service</option>
+                        </select>
+                    </div>
+                    
+                    <div class="page-editor">
+                        <div class="form-group">
+                            <label>Page Title</label>
+                            <input type="text" class="form-control" id="pageTitle" value="AI Hug Me - Get Your Virtual Hug">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Page Content (HTML)</label>
+                            <textarea class="form-control" id="pageContent" rows="10">
+<div class="hero-section">
+    <h1>Get an AI-Powered Virtual Hug!</h1>
+    <p>Experience the warmth of a virtual hug powered by artificial intelligence.</p>
+    <button class="hug-button">Get Your Hug Now</button>
+</div>
+                            </textarea>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Meta Description</label>
+                            <textarea class="form-control" id="metaDescription" rows="2">Get a completely AI-powered virtual hug! Experience warmth and comfort with our AI technology.</textarea>
                         </div>
                     </div>
                     
-                    <div class="form-group">
-                        <label>Terms & Conditions</label>
-                        <div class="page-editor">
-                            <textarea id="termsPageContent" placeholder="Enter terms and conditions here... (HTML supported)"></textarea>
-                        </div>
-                    </div>
+                    <button class="btn btn-success" id="savePageBtn">Save Page Content</button>
                     
-                    <div class="form-group">
-                        <label>Privacy Policy</label>
-                        <div class="page-editor">
-                            <textarea id="privacyPageContent" placeholder="Enter privacy policy here... (HTML supported)"></textarea>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>Contact Page Content</label>
-                        <div class="page-editor">
-                            <textarea id="contactPageContent" placeholder="Enter contact page content here... (HTML supported)"></textarea>
-                        </div>
-                    </div>
-                    
-                    <button class="btn btn-success" id="savePageContent" style="width: 100%;">Save All Page Content</button>
                     <div class="success-message hidden" id="pageSuccess">
                         Page content saved successfully!
                     </div>
                 </div>
             </div>
             
-            <!-- Advanced Analytics Panel -->
+            <!-- Analytics Panel -->
             <div id="analytics" class="admin-panel">
-                <div class="chart-container">
-                    <div class="chart-title">Real-time User Engagement Analytics <span class="real-time-badge">LIVE</span></div>
-                    <canvas id="analyticsChart"></canvas>
-                </div>
-                
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-label">Total Users</div>
-                        <div class="stat-value" id="totalUsers">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Total Hugs</div>
-                        <div class="stat-value" id="totalHugsCount">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Active Now</div>
-                        <div class="stat-value" id="activeNow">0</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-label">Retention Rate</div>
-                        <div class="stat-value" id="retentionRate">0%</div>
-                    </div>
-                </div>
-                
                 <div class="table-container">
-                    <div class="chart-title">Real-time Analytics Report <span class="real-time-badge">UPDATING</span></div>
-                    <div id="analyticsReport">
-                        <!-- Analytics data will be shown here -->
+                    <div class="chart-title">Advanced Analytics Dashboard</div>
+                    
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Total Page Views</div>
+                            <div class="stat-value">12,458</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Unique Visitors</div>
+                            <div class="stat-value">8,742</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Bounce Rate</div>
+                            <div class="stat-value">32.5%</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-label">Avg. Session</div>
+                            <div class="stat-value">2m 45s</div>
+                        </div>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-title">Traffic Sources</div>
+                        <canvas id="trafficChart"></canvas>
+                    </div>
+                    
+                    <div class="chart-container">
+                        <div class="chart-title">User Demographics</div>
+                        <canvas id="demographicsChart"></canvas>
+                    </div>
+                    
+                    <div class="table-container">
+                        <div class="chart-title">Recent Activity</div>
+                        <div class="recent-activity">
+                            <div class="activity-item">
+                                <div class="activity-icon">📊</div>
+                                <div class="activity-content">
+                                    <strong>User from United States</strong> viewed the home page
+                                </div>
+                                <div class="activity-time">2 minutes ago</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">🤗</div>
+                                <div class="activity-content">
+                                    <strong>User from India</strong> received a virtual hug
+                                </div>
+                                <div class="activity-time">5 minutes ago</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">💰</div>
+                                <div class="activity-content">
+                                    <strong>Ad revenue</strong> generated from Google AdSense
+                                </div>
+                                <div class="activity-time">12 minutes ago</div>
+                            </div>
+                            <div class="activity-item">
+                                <div class="activity-icon">📱</div>
+                                <div class="activity-content">
+                                    <strong>Mobile user</strong> from Brazil visited the site
+                                </div>
+                                <div class="activity-time">18 minutes ago</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <!-- User Management Panel -->
+            <!-- Users Management Panel -->
             <div id="users" class="admin-panel">
                 <div class="table-container">
-                    <div class="chart-title">User Management & Analytics <span class="real-time-badge">LIVE</span></div>
+                    <div class="chart-title">User Management</div>
                     
                     <div class="search-filter">
                         <input type="text" class="form-control" id="userSearch" placeholder="Search users...">
-                        <button class="btn btn-primary" onclick="searchUsers()">Search</button>
+                        <button class="btn btn-primary">Search</button>
                     </div>
                     
-                    <div class="user-activity-grid">
-                        <div class="user-activity-card">
-                            <div class="stat-value" id="totalUsersCount">0</div>
-                            <div class="stat-label">Total Users</div>
-                        </div>
-                        <div class="user-activity-card">
-                            <div class="stat-value" id="activeUsersCount">0</div>
-                            <div class="stat-label">Active Now</div>
-                        </div>
-                        <div class="user-activity-card">
-                            <div class="stat-value" id="avgHugsPerUser">0</div>
-                            <div class="stat-label">Avg Hugs/User</div>
-                        </div>
-                        <div class="user-activity-card">
-                            <div class="stat-value" id="userRetentionRate">0%</div>
-                            <div class="stat-label">Retention Rate</div>
-                        </div>
-                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>User ID</th>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Hugs</th>
+                                <th>Last Active</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>#001</td>
+                                <td>John Doe</td>
+                                <td>john@example.com</td>
+                                <td>12</td>
+                                <td>2 hours ago</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#002</td>
+                                <td>Jane Smith</td>
+                                <td>jane@example.com</td>
+                                <td>8</td>
+                                <td>5 hours ago</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>#003</td>
+                                <td>Bob Johnson</td>
+                                <td>bob@example.com</td>
+                                <td>15</td>
+                                <td>1 day ago</td>
+                                <td>
+                                    <button class="btn btn-sm btn-primary">View</button>
+                                    <button class="btn btn-sm btn-danger">Delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     
-                    <div class="chart-container" style="height: 250px;">
-                        <div class="chart-title">User Growth Over Time</div>
-                        <canvas id="userGrowthChart"></canvas>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label>User Actions</label>
-                        <div class="quick-actions">
-                            <button class="btn btn-primary" id="exportAllData">Export Data</button>
-                            <button class="btn btn-warning" id="sendNotification">Send Notification</button>
-                            <button class="btn btn-danger" id="deleteInactiveUsers">Cleanup Users</button>
-                        </div>
+                    <div class="form-group" style="margin-top: 15px;">
+                        <button class="btn btn-success">Add New User</button>
+                        <button class="btn btn-warning">Export Users</button>
+                        <button class="btn btn-danger">Delete All Users</button>
                     </div>
                 </div>
             </div>
@@ -1182,805 +1640,598 @@
     </div>
 
     <script>
-        // Enhanced Admin Panel with Mobile Support
-        console.log("🚀 Nrepesh Admin - Mobile Enhanced Version Loaded");
-
-        // Admin state management
-        const AdminState = {
-            isLoggedIn: false,
-            charts: {},
-            adminData: null,
-            currentTab: 'dashboard',
-            footerLinks: []
+        // DOM Elements
+        const loginPage = document.getElementById('loginPage');
+        const adminPage = document.getElementById('adminPage');
+        const loginBtn = document.getElementById('loginBtn');
+        const logoutBtn = document.getElementById('logoutBtn');
+        const adminPassword = document.getElementById('adminPassword');
+        const loginError = document.getElementById('loginError');
+        const navTabs = document.querySelectorAll('.nav-tab');
+        const adminPanels = document.querySelectorAll('.admin-panel');
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const navTabsContainer = document.getElementById('navTabs');
+        
+        // Enhanced Ad Management Elements
+        const addSlotBtn = document.getElementById('addSlotBtn');
+        const adSlotsContainer = document.getElementById('adSlotsContainer');
+        const previewImageBtn = document.getElementById('previewImageBtn');
+        const saveImageBtn = document.getElementById('saveImageBtn');
+        const imagePreview = document.getElementById('imagePreview');
+        const externalImageUrl = document.getElementById('externalImageUrl');
+        const popupTriggerOptions = document.querySelectorAll('.popup-trigger-option');
+        
+        // Chart variables
+        let realtimeChart, revenueChart, trafficChart, demographicsChart;
+        
+        // Demo data for charts
+        const demoData = {
+            realtime: [12, 19, 3, 5, 2, 3, 15, 12, 8, 10, 14, 18],
+            revenue: [120, 190, 300, 500, 200, 300, 450, 320, 480, 390, 420, 550],
+            traffic: [40, 30, 20, 10],
+            demographics: [30, 25, 20, 15, 10]
         };
-
-        // Initialize admin data with enhanced capabilities
-        function initializeAdminData() {
-            let adminData = {
-                password: "admin123",
-                stats: {
-                    totalHugs: 0,
-                    activeUsers: 0,
-                    todayRevenue: 0,
-                    avgSessionTime: 0,
-                    totalUsers: 0,
-                    activeNow: 0,
-                    avgHugsPerUser: 0,
-                    retentionRate: 0
+        
+        // Initialize the application
+        function init() {
+            // Check if user is already logged in
+            if (localStorage.getItem('adminLoggedIn') === 'true') {
+                showAdminPage();
+            }
+            
+            // Set up event listeners
+            setupEventListeners();
+            
+            // Initialize charts
+            initCharts();
+            
+            // Load initial data
+            loadInitialData();
+            
+            // Start real-time updates
+            startRealTimeUpdates();
+        }
+        
+        // Set up all event listeners
+        function setupEventListeners() {
+            // Login functionality
+            loginBtn.addEventListener('click', handleLogin);
+            adminPassword.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') handleLogin();
+            });
+            
+            // Logout functionality
+            logoutBtn.addEventListener('click', handleLogout);
+            
+            // Navigation tabs
+            navTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabName = tab.getAttribute('data-tab');
+                    switchTab(tabName);
+                });
+            });
+            
+            // Mobile menu toggle
+            mobileMenuToggle.addEventListener('click', () => {
+                navTabsContainer.classList.toggle('show');
+            });
+            
+            // Enhanced Ad Management
+            addSlotBtn.addEventListener('click', addAdSlot);
+            previewImageBtn.addEventListener('click', previewExternalImage);
+            saveImageBtn.addEventListener('click', saveImageAd);
+            
+            // Popup trigger options
+            popupTriggerOptions.forEach(option => {
+                option.addEventListener('click', () => {
+                    popupTriggerOptions.forEach(opt => opt.classList.remove('active'));
+                    option.classList.add('active');
+                });
+            });
+            
+            // Save buttons
+            document.getElementById('applySettings').addEventListener('click', saveSiteSettings);
+            document.getElementById('saveFooterBtn').addEventListener('click', saveFooterSettings);
+            document.getElementById('savePageBtn').addEventListener('click', savePageContent);
+            document.getElementById('saveAdSettings').addEventListener('click', saveAdSettings);
+            
+            // Reset buttons
+            document.getElementById('resetSettings').addEventListener('click', resetSiteSettings);
+            document.getElementById('resetAdSettings').addEventListener('click', resetAdSettings);
+            
+            // Emergency buttons
+            document.getElementById('emergencyShutdown').addEventListener('click', emergencyShutdown);
+            document.getElementById('clearAllData').addEventListener('click', clearAllData);
+            
+            // Export buttons
+            document.getElementById('exportAdData').addEventListener('click', exportAdData);
+        }
+        
+        // Handle user login
+        function handleLogin() {
+            const password = adminPassword.value;
+            
+            // Simple password check (in real app, this would be more secure)
+            if (password === 'admin123') {
+                localStorage.setItem('adminLoggedIn', 'true');
+                showAdminPage();
+            } else {
+                loginError.classList.remove('hidden');
+            }
+        }
+        
+        // Handle user logout
+        function handleLogout() {
+            localStorage.removeItem('adminLoggedIn');
+            showLoginPage();
+        }
+        
+        // Show admin page after successful login
+        function showAdminPage() {
+            loginPage.classList.add('hidden');
+            adminPage.classList.remove('hidden');
+            
+            // Refresh data when showing admin page
+            refreshStats();
+        }
+        
+        // Show login page
+        function showLoginPage() {
+            loginPage.classList.remove('hidden');
+            adminPage.classList.add('hidden');
+            adminPassword.value = '';
+            loginError.classList.add('hidden');
+        }
+        
+        // Switch between admin panels
+        function switchTab(tabName) {
+            // Update active tab
+            navTabs.forEach(tab => {
+                if (tab.getAttribute('data-tab') === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Show active panel
+            adminPanels.forEach(panel => {
+                if (panel.id === tabName) {
+                    panel.classList.add('active');
+                } else {
+                    panel.classList.remove('active');
+                }
+            });
+            
+            // Hide mobile menu after selection
+            if (window.innerWidth <= 768) {
+                navTabsContainer.classList.remove('show');
+            }
+            
+            // Refresh data for specific tabs
+            if (tabName === 'dashboard') {
+                refreshStats();
+            } else if (tabName === 'analytics') {
+                updateAnalyticsCharts();
+            }
+        }
+        
+        // Initialize charts
+        function initCharts() {
+            // Real-time chart
+            const realtimeCtx = document.getElementById('realtimeChart').getContext('2d');
+            realtimeChart = new Chart(realtimeCtx, {
+                type: 'line',
+                data: {
+                    labels: ['12:00', '12:05', '12:10', '12:15', '12:20', '12:25', '12:30', '12:35', '12:40', '12:45', '12:50', '12:55'],
+                    datasets: [{
+                        label: 'Hugs per 5 min',
+                        data: demoData.realtime,
+                        borderColor: '#6a11cb',
+                        backgroundColor: 'rgba(106, 17, 203, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
                 },
-                pageContent: {
-                    about: '<h3>About AI Hug Me</h3><p>AI Hug Me is an innovative platform that uses advanced artificial intelligence to generate unique virtual hug experiences.</p><p>Our mission is to spread digital comfort and emotional support through cutting-edge AI technology.</p>',
-                    terms: '<h3>Terms & Conditions</h3><p><strong>Last Updated: January 2025</strong></p><p>By using AI Hug Me, you agree to our terms of service...</p>',
-                    privacy: '<h3>Privacy Policy</h3><p><strong>Your Privacy Matters</strong></p><p>We are committed to protecting your personal information and privacy...</p>',
-                    contact: '<h3>Contact Us</h3><p>We\'d love to hear from you!</p><p>Email: contact@aihugme.com<br>Phone: +1-555-AI-HUG-ME</p>'
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            
+            // Revenue chart
+            const revenueCtx = document.getElementById('revenueChart').getContext('2d');
+            revenueChart = new Chart(revenueCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Google AdSense', 'Direct Ads', 'Affiliate', 'Programmatic'],
+                    datasets: [{
+                        data: [45, 30, 15, 10],
+                        backgroundColor: [
+                            '#4285F4',
+                            '#34A853',
+                            '#FBBC05',
+                            '#EA4335'
+                        ]
+                    }]
                 },
-                footerSettings: {
-                    text: "© 2025 AI Hug Me. All Rights Reserved.",
-                    links: [
-                        { text: "About AI Hugs", href: "#", id: "aboutLink" },
-                        { text: "Privacy Policy", href: "#", id: "privacyLink" },
-                        { text: "Terms & Conditions", href: "#", id: "termsLink" },
-                        { text: "Contact Us", href: "#", id: "contactLink" }
-                    ]
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Traffic sources chart
+            const trafficCtx = document.getElementById('trafficChart').getContext('2d');
+            trafficChart = new Chart(trafficCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Direct', 'Social Media', 'Search Engines', 'Referrals'],
+                    datasets: [{
+                        data: demoData.traffic,
+                        backgroundColor: [
+                            '#6a11cb',
+                            '#2575fc',
+                            '#ff6b6b',
+                            '#28a745'
+                        ]
+                    }]
                 },
-                recentActivity: []
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
+                        }
+                    }
+                }
+            });
+            
+            // Demographics chart
+            const demographicsCtx = document.getElementById('demographicsChart').getContext('2d');
+            demographicsChart = new Chart(demographicsCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['18-24', '25-34', '35-44', '45-54', '55+'],
+                    datasets: [{
+                        label: 'Users by Age',
+                        data: demoData.demographics,
+                        backgroundColor: '#6a11cb'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Load initial data
+        function loadInitialData() {
+            // Load saved settings if available
+            const savedSettings = localStorage.getItem('siteSettings');
+            if (savedSettings) {
+                const settings = JSON.parse(savedSettings);
+                document.getElementById('siteTitle').value = settings.siteTitle || 'AI Hug Me';
+                document.getElementById('siteTagline').value = settings.siteTagline || 'Get a completely AI-powered virtual hug!';
+            }
+            
+            // Load saved ad slots
+            const savedAdSlots = localStorage.getItem('adSlots');
+            if (savedAdSlots) {
+                const slots = JSON.parse(savedAdSlots);
+                slots.forEach(slot => renderAdSlot(slot));
+            }
+        }
+        
+        // Refresh dashboard stats
+        function refreshStats() {
+            // Simulate API calls to get real data
+            document.getElementById('totalHugs').textContent = Math.floor(Math.random() * 1000) + 500;
+            document.getElementById('activeUsers').textContent = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('todayRevenue').textContent = '$' + (Math.random() * 50 + 10).toFixed(2);
+            document.getElementById('avgSessionTime').textContent = Math.floor(Math.random() * 120 + 30) + 's';
+            
+            // Update real-time chart with new data
+            const newData = demoData.realtime.map(value => value + Math.floor(Math.random() * 10 - 5));
+            realtimeChart.data.datasets[0].data = newData;
+            realtimeChart.update();
+            
+            // Update live user activity
+            updateLiveUserActivity();
+        }
+        
+        // Update live user activity
+        function updateLiveUserActivity() {
+            const activities = [
+                { icon: '🤗', text: 'User from United States received a virtual hug', time: 'Just now' },
+                { icon: '📱', text: 'Mobile user from India visited the site', time: '1 min ago' },
+                { icon: '💰', text: 'Ad revenue generated from Direct Ads', time: '2 mins ago' },
+                { icon: '🌍', text: 'User from Brazil shared a hug on social media', time: '3 mins ago' }
+            ];
+            
+            const activityContainer = document.getElementById('liveUserActivity');
+            activityContainer.innerHTML = '';
+            
+            activities.forEach(activity => {
+                const activityCard = document.createElement('div');
+                activityCard.className = 'user-activity-card';
+                activityCard.innerHTML = `
+                    <div style="font-size: 1.5rem;">${activity.icon}</div>
+                    <div style="font-size: 0.85rem; margin-top: 5px;">${activity.text}</div>
+                    <div style="font-size: 0.7rem; color: #666; margin-top: 5px;">${activity.time}</div>
+                `;
+                activityContainer.appendChild(activityCard);
+            });
+        }
+        
+        // Start real-time updates
+        function startRealTimeUpdates() {
+            // Update stats every 10 seconds
+            setInterval(refreshStats, 10000);
+            
+            // Update charts every 30 seconds
+            setInterval(updateAnalyticsCharts, 30000);
+        }
+        
+        // Update analytics charts
+        function updateAnalyticsCharts() {
+            // Simulate updating chart data
+            const newRevenueData = demoData.revenue.map(value => value + Math.floor(Math.random() * 100 - 50));
+            revenueChart.data.datasets[0].data = newRevenueData;
+            revenueChart.update();
+            
+            const newTrafficData = demoData.traffic.map(value => value + Math.floor(Math.random() * 10 - 5));
+            trafficChart.data.datasets[0].data = newTrafficData;
+            trafficChart.update();
+            
+            const newDemographicsData = demoData.demographics.map(value => value + Math.floor(Math.random() * 5 - 2));
+            demographicsChart.data.datasets[0].data = newDemographicsData;
+            demographicsChart.update();
+        }
+        
+        // Enhanced Ad Management Functions
+        
+        // Add a new ad slot
+        function addAdSlot() {
+            const slotName = document.getElementById('slotName').value;
+            const slotType = document.getElementById('slotType').value;
+            const slotDimensions = document.getElementById('slotDimensions').value;
+            const slotCpmRate = document.getElementById('slotCpmRate').value;
+            const slotPriority = document.getElementById('slotPriority').value;
+            const slotStatus = document.getElementById('slotStatus').value;
+            
+            if (!slotName || !slotDimensions) {
+                alert('Please fill in all required fields');
+                return;
+            }
+            
+            const slot = {
+                id: Date.now(),
+                name: slotName,
+                type: slotType,
+                dimensions: slotDimensions,
+                cpmRate: slotCpmRate,
+                priority: slotPriority,
+                status: slotStatus,
+                createdAt: new Date().toISOString()
             };
             
-            localStorage.setItem('aiHugMeAdminData', JSON.stringify(adminData));
-            return adminData;
-        }
-
-        // Load or initialize admin data
-        AdminState.adminData = JSON.parse(localStorage.getItem('aiHugMeAdminData')) || initializeAdminData();
-        AdminState.footerLinks = AdminState.adminData.footerSettings.links;
-
-        // Initialize when page loads
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log("Admin Panel Ready with Mobile Support");
-            setupEventListeners();
-            loadCurrentSettings();
-            loadFooterSettings();
-            checkAdminStatus();
-            setupMobileMenu();
+            // Save to localStorage
+            const savedSlots = localStorage.getItem('adSlots');
+            const slots = savedSlots ? JSON.parse(savedSlots) : [];
+            slots.push(slot);
+            localStorage.setItem('adSlots', JSON.stringify(slots));
             
-            // Wait for analytics manager to load
-            setTimeout(() => {
-                if (window.analyticsManager) {
-                    updateDashboardStats();
-                }
-            }, 1000);
-        });
-
-        // Mobile menu setup
-        function setupMobileMenu() {
-            const mobileToggle = document.getElementById('mobileMenuToggle');
-            const navTabs = document.getElementById('navTabs');
+            // Render the slot
+            renderAdSlot(slot);
             
-            if (mobileToggle && navTabs) {
-                mobileToggle.addEventListener('click', function() {
-                    navTabs.classList.toggle('show');
-                });
-                
-                // Close mobile menu when clicking outside
-                document.addEventListener('click', function(e) {
-                    if (!mobileToggle.contains(e.target) && !navTabs.contains(e.target)) {
-                        navTabs.classList.remove('show');
-                    }
-                });
-            }
+            // Clear form
+            document.getElementById('slotName').value = '';
+            document.getElementById('slotDimensions').value = '';
         }
-
-        function checkAdminStatus() {
-            // Check if user is already logged in
-            const isLoggedIn = sessionStorage.getItem('adminLoggedIn');
-            if (isLoggedIn === 'true') {
-                AdminState.isLoggedIn = true;
-                document.getElementById('loginPage').classList.add('hidden');
-                document.getElementById('adminPage').classList.remove('hidden');
-                startRealtimeUpdates();
-                setTimeout(initializeCharts, 500);
-            }
-        }
-
-        function startRealtimeUpdates() {
-            // Update dashboard every 10 seconds
-            setInterval(updateDashboardStats, 10000);
-            updateDashboardStats(); // Initial update
-            
-            // Update live user count every 15 seconds
-            setInterval(updateLiveUsers, 15000);
-            updateLiveUsers(); // Initial update
-        }
-
-        function updateDashboardStats() {
-            try {
-                if (window.analyticsManager) {
-                    const stats = window.analyticsManager.calculateStats();
-                    const allUsersData = window.analyticsManager.getAllUsersData();
-                    
-                    // Update dashboard with real data
-                    document.getElementById('totalHugs').textContent = allUsersData.totalHugs.toLocaleString();
-                    document.getElementById('activeUsers').textContent = window.analyticsManager.getLiveUserCount();
-                    document.getElementById('todayRevenue').textContent = `$${(allUsersData.totalHugs * 0.01).toFixed(2)}`;
-                    document.getElementById('avgSessionTime').textContent = `${stats.avgSessionDuration || 45}s`;
-                    
-                    // Update analytics panel
-                    document.getElementById('totalUsers').textContent = allUsersData.totalUsers;
-                    document.getElementById('totalHugsCount').textContent = allUsersData.totalHugs;
-                    document.getElementById('activeNow').textContent = window.analyticsManager.getLiveUserCount();
-                    document.getElementById('retentionRate').textContent = `${Math.floor(Math.random() * 30) + 60}%`;
-                    
-                    // Update user management panel
-                    document.getElementById('totalUsersCount').textContent = allUsersData.totalUsers;
-                    document.getElementById('activeUsersCount').textContent = window.analyticsManager.getLiveUserCount();
-                    document.getElementById('avgHugsPerUser').textContent = allUsersData.totalUsers ? (allUsersData.totalHugs / allUsersData.totalUsers).toFixed(1) : '0';
-                    document.getElementById('userRetentionRate').textContent = `${Math.floor(Math.random() * 30) + 60}%`;
-                    
-                    // Update live user activity
-                    updateLiveUserActivity();
-                }
-            } catch (error) {
-                console.error('Error updating dashboard stats:', error);
-            }
-        }
-
-        function updateLiveUsers() {
-            const liveUsersCount = document.getElementById('activeUsers');
-            if (liveUsersCount && window.analyticsManager) {
-                const count = window.analyticsManager.getLiveUserCount();
-                liveUsersCount.textContent = count;
-            }
-        }
-
-        function updateLiveUserActivity() {
-            try {
-                const activityContainer = document.getElementById('liveUserActivity');
-                const activities = [
-                    { type: 'hug_generated', icon: '🤗', text: 'New Hug Generated' },
-                    { type: 'user_joined', icon: '👤', text: 'New User Joined' },
-                    { type: 'page_view', icon: '🌐', text: 'Page Viewed' },
-                    { type: 'social_share', icon: '📤', text: 'Content Shared' }
-                ];
-                
-                const recentActivities = Array.from({length: 8}, () => {
-                    const activity = activities[Math.floor(Math.random() * activities.length)];
-                    const timeAgo = `${Math.floor(Math.random() * 5) + 1}m ago`;
-                    return { ...activity, time: timeAgo };
-                });
-                
-                activityContainer.innerHTML = recentActivities.map(activity => `
-                    <div class="user-activity-card">
-                        <div style="font-size: 1.3rem; margin-bottom: 6px;">${activity.icon}</div>
-                        <div style="font-size: 0.8rem; font-weight: bold;">${activity.text}</div>
-                        <div style="font-size: 0.7rem; color: #666; margin-top: 4px;">${activity.time}</div>
+        
+        // Render an ad slot in the UI
+        function renderAdSlot(slot) {
+            const slotElement = document.createElement('div');
+            slotElement.className = 'ad-slot-item';
+            slotElement.innerHTML = `
+                <div class="ad-slot-header">
+                    <div>
+                        <strong>${slot.name}</strong>
+                        <span class="badge ${slot.status === 'active' ? 'badge-success' : 'badge-warning'}">${slot.status}</span>
+                        <span class="network-badge network-direct">${slot.type}</span>
                     </div>
-                `).join('');
-            } catch (error) {
-                console.error('Error updating live user activity:', error);
-            }
-        }
-
-        // Enhanced event listeners with mobile support
-        function setupEventListeners() {
-            // Login
-            document.getElementById('loginBtn').addEventListener('click', loginAdmin);
-            document.getElementById('adminPassword').addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') loginAdmin();
-            });
-            
-            // Logout
-            document.getElementById('logoutBtn').addEventListener('click', logoutAdmin);
-            
-            // Enhanced Settings
-            document.getElementById('applySettings').addEventListener('click', applySiteSettings);
-            document.getElementById('resetSettings').addEventListener('click', resetSiteSettings);
-            document.getElementById('clearAllData').addEventListener('click', clearAllUserData);
-            document.getElementById('emergencyShutdown').addEventListener('click', emergencyShutdown);
-            
-            // Footer Settings
-            document.getElementById('saveFooterSettings').addEventListener('click', saveFooterSettings);
-            
-            // Page Content
-            document.getElementById('savePageContent').addEventListener('click', savePageContent);
-            
-            // User Management
-            document.getElementById('exportAllData').addEventListener('click', exportAllUserData);
-            document.getElementById('sendNotification').addEventListener('click', sendNotification);
-            document.getElementById('deleteInactiveUsers').addEventListener('click', deleteInactiveUsers);
-            
-            // Navigation with mobile support
-            document.querySelectorAll('.nav-tab').forEach(tab => {
-                tab.addEventListener('click', function() {
-                    switchTab(this.getAttribute('data-tab'));
-                    // Close mobile menu after selection
-                    document.getElementById('navTabs').classList.remove('show');
-                });
-            });
-        }
-
-        function switchTab(tabName) {
-            document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-            document.querySelectorAll('.admin-panel').forEach(p => p.classList.remove('active'));
-            
-            document.querySelector(`[data-tab="${tabName}"]`).classList.add('active');
-            document.getElementById(tabName).classList.add('active');
-            
-            AdminState.currentTab = tabName;
-            
-            // Initialize charts when analytics tab is opened
-            if (tabName === 'analytics') {
-                setTimeout(initializeCharts, 100);
-            }
-            
-            // Initialize user growth chart when users tab is opened
-            if (tabName === 'users') {
-                setTimeout(initializeCharts, 100);
-            }
-        }
-
-        function loginAdmin() {
-            const password = document.getElementById('adminPassword').value;
-            const errorElement = document.getElementById('loginError');
-            
-            if (password === AdminState.adminData.password) {
-                AdminState.isLoggedIn = true;
-                sessionStorage.setItem('adminLoggedIn', 'true');
-                document.getElementById('loginPage').classList.add('hidden');
-                document.getElementById('adminPage').classList.remove('hidden');
-                
-                // Start real-time updates
-                startRealtimeUpdates();
-                
-                // Initialize charts
-                setTimeout(initializeCharts, 500);
-                
-                console.log('✅ Admin login successful');
-            } else {
-                errorElement.classList.remove('hidden');
-                console.log('❌ Admin login failed');
-            }
-        }
-
-        function logoutAdmin() {
-            AdminState.isLoggedIn = false;
-            sessionStorage.removeItem('adminLoggedIn');
-            
-            // Destroy charts
-            Object.values(AdminState.charts).forEach(chart => {
-                if (chart && typeof chart.destroy === 'function') {
-                    chart.destroy();
-                }
-            });
-            AdminState.charts = {};
-            
-            document.getElementById('adminPage').classList.add('hidden');
-            document.getElementById('loginPage').classList.remove('hidden');
-            document.getElementById('adminPassword').value = 'admin123';
-            document.getElementById('loginError').classList.add('hidden');
-            
-            console.log('✅ Admin logout successful');
-        }
-
-        // Enhanced Admin Functions with Mobile Support
-        function clearAllUserData() {
-            if (confirm('🚨 SUPER ADMIN ACTION: This will delete ALL user data across the entire platform. This cannot be undone!')) {
-                try {
-                    // Clear all localStorage
-                    const keys = Object.keys(localStorage);
-                    let clearedCount = 0;
-                    keys.forEach(key => {
-                        if (key.startsWith('aihug_') || key.startsWith('aiHugMeUser')) {
-                            localStorage.removeItem(key);
-                            clearedCount++;
-                        }
-                    });
-                    
-                    console.log(`All user data cleared: ${clearedCount} items removed`);
-                    showTemporaryMessage(`✅ ALL user data cleared successfully! ${clearedCount} items removed`, 'success');
-                    
-                    // Track this admin action
-                    if (window.analyticsManager) {
-                        window.analyticsManager.trackEvent('admin_action', {
-                            action: 'clear_all_user_data',
-                            admin: 'super_admin',
-                            items_cleared: clearedCount
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error clearing user data:', error);
-                    showTemporaryMessage('❌ Error clearing user data', 'error');
-                }
-            }
-        }
-
-        function emergencyShutdown() {
-            if (confirm('🚨 EMERGENCY SHUTDOWN: This will disable the entire website for all users! Are you sure?')) {
-                try {
-                    const settings = JSON.parse(localStorage.getItem('aiHugMeSiteSettings') || '{}');
-                    settings.emergencyShutdown = true;
-                    settings.shutdownMessage = "Website temporarily unavailable for maintenance.";
-                    settings.shutdownTime = new Date().toISOString();
-                    localStorage.setItem('aiHugMeSiteSettings', JSON.stringify(settings));
-                    
-                    showTemporaryMessage('🚨 EMERGENCY SHUTDOWN ACTIVATED! Website is now disabled.', 'success');
-                    
-                    // Track shutdown event
-                    if (window.analyticsManager) {
-                        window.analyticsManager.trackEvent('admin_action', {
-                            action: 'emergency_shutdown',
-                            admin: 'super_admin',
-                            timestamp: new Date().toISOString()
-                        });
-                    }
-                } catch (error) {
-                    console.error('Error during emergency shutdown:', error);
-                    showTemporaryMessage('❌ Error activating emergency shutdown', 'error');
-                }
-            }
-        }
-
-        function exportAllUserData() {
-            try {
-                // In a real app, this would export all user data
-                const exportData = {
-                    timestamp: new Date().toISOString(),
-                    totalUsers: document.getElementById('totalUsersCount').textContent,
-                    totalHugs: document.getElementById('totalHugs').textContent,
-                    exportType: 'complete_user_data',
-                    admin: 'super_admin'
-                };
-                
-                const dataStr = JSON.stringify(exportData, null, 2);
-                const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                const url = URL.createObjectURL(dataBlob);
-                const link = document.createElement('a');
-                link.href = url;
-                link.download = `ai-hug-me-complete-export-${new Date().toISOString().split('T')[0]}.json`;
-                link.click();
-                
-                showTemporaryMessage('✅ Complete user data export started!', 'success');
-            } catch (error) {
-                console.error('Error exporting data:', error);
-                showTemporaryMessage('❌ Error exporting data', 'error');
-            }
-        }
-
-        function sendNotification() {
-            const message = prompt('Enter notification message for all users:');
-            if (message) {
-                try {
-                    // In a real app, this would send push notifications
-                    console.log('Notification sent to all users:', message);
-                    
-                    // Save notification to settings
-                    const settings = JSON.parse(localStorage.getItem('aiHugMeSiteSettings') || '{}');
-                    settings.lastNotification = {
-                        message: message,
-                        timestamp: new Date().toISOString(),
-                        sentBy: 'admin'
-                    };
-                    localStorage.setItem('aiHugMeSiteSettings', JSON.stringify(settings));
-                    
-                    showTemporaryMessage(`✅ Notification sent: "${message}"`, 'success');
-                } catch (error) {
-                    console.error('Error sending notification:', error);
-                    showTemporaryMessage('❌ Error sending notification', 'error');
-                }
-            }
-        }
-
-        function deleteInactiveUsers() {
-            if (confirm('Delete all users inactive for more than 30 days?')) {
-                try {
-                    // In a real app, this would delete from storage
-                    console.log('Inactive users deletion process started');
-                    
-                    // Simulate deletion
-                    setTimeout(() => {
-                        showTemporaryMessage('✅ Inactive users deletion process completed!', 'success');
-                    }, 2000);
-                    
-                } catch (error) {
-                    console.error('Error deleting inactive users:', error);
-                    showTemporaryMessage('❌ Error deleting inactive users', 'error');
-                }
-            }
-        }
-
-        function showTemporaryMessage(message, type, duration = 5000) {
-            const messageElement = document.createElement('div');
-            messageElement.className = type === 'success' ? 'success-message' : 'error-message';
-            messageElement.innerHTML = message;
-            
-            messageElement.style.position = 'fixed';
-            messageElement.style.top = '20px';
-            messageElement.style.right = '20px';
-            messageElement.style.zIndex = '10000';
-            messageElement.style.minWidth = '300px';
-            messageElement.style.maxWidth = '90vw';
-            
-            document.body.appendChild(messageElement);
-            
-            setTimeout(() => {
-                if (messageElement.parentNode) {
-                    messageElement.parentNode.removeChild(messageElement);
-                }
-            }, duration);
-        }
-
-        // Footer Management Functions
-        function loadFooterSettings() {
-            const footerText = document.getElementById('footerText');
-            const footerLinksContainer = document.getElementById('footerLinksContainer');
-            const footerPreview = document.getElementById('footerPreview');
-            
-            if (footerText) {
-                footerText.value = AdminState.adminData.footerSettings.text;
-            }
-            
-            renderFooterLinks();
-            updateFooterPreview();
-        }
-
-        function renderFooterLinks() {
-            const footerLinksContainer = document.getElementById('footerLinksContainer');
-            if (!footerLinksContainer) return;
-            
-            footerLinksContainer.innerHTML = '';
-            
-            AdminState.footerLinks.forEach((link, index) => {
-                const linkElement = document.createElement('div');
-                linkElement.className = 'footer-link-item';
-                linkElement.innerHTML = `
-                    <div class="footer-link-inputs">
-                        <input type="text" class="form-control" value="${link.text}" placeholder="Link Text" onchange="updateFooterLink(${index}, 'text', this.value)">
-                        <input type="text" class="form-control" value="${link.href}" placeholder="Link URL" onchange="updateFooterLink(${index}, 'href', this.value)">
-                        <input type="text" class="form-control" value="${link.id}" placeholder="Link ID" onchange="updateFooterLink(${index}, 'id', this.value)">
-                    </div>
-                    <div class="footer-link-actions">
-                        <button class="btn btn-sm btn-danger" onclick="removeFooterLink(${index})">✕</button>
-                        <button class="btn btn-sm btn-secondary" onclick="moveFooterLinkUp(${index})" ${index === 0 ? 'disabled' : ''}>↑</button>
-                        <button class="btn btn-sm btn-secondary" onclick="moveFooterLinkDown(${index})" ${index === AdminState.footerLinks.length - 1 ? 'disabled' : ''}>↓</button>
-                    </div>
-                `;
-                footerLinksContainer.appendChild(linkElement);
-            });
-        }
-
-        function addFooterLink() {
-            AdminState.footerLinks.push({
-                text: "New Link",
-                href: "#",
-                id: "newLink"
-            });
-            renderFooterLinks();
-            updateFooterPreview();
-        }
-
-        function removeFooterLink(index) {
-            AdminState.footerLinks.splice(index, 1);
-            renderFooterLinks();
-            updateFooterPreview();
-        }
-
-        function updateFooterLink(index, field, value) {
-            AdminState.footerLinks[index][field] = value;
-            updateFooterPreview();
-        }
-
-        function moveFooterLinkUp(index) {
-            if (index > 0) {
-                const temp = AdminState.footerLinks[index];
-                AdminState.footerLinks[index] = AdminState.footerLinks[index - 1];
-                AdminState.footerLinks[index - 1] = temp;
-                renderFooterLinks();
-                updateFooterPreview();
-            }
-        }
-
-        function moveFooterLinkDown(index) {
-            if (index < AdminState.footerLinks.length - 1) {
-                const temp = AdminState.footerLinks[index];
-                AdminState.footerLinks[index] = AdminState.footerLinks[index + 1];
-                AdminState.footerLinks[index + 1] = temp;
-                renderFooterLinks();
-                updateFooterPreview();
-            }
-        }
-
-        function updateFooterPreview() {
-            const footerPreview = document.getElementById('footerPreview');
-            if (!footerPreview) return;
-            
-            const linksHTML = AdminState.footerLinks.map(link => 
-                `<a href="${link.href}" id="${link.id}" style="color: #6a11cb; text-decoration: none; margin: 0 10px; font-weight: 500;">${link.text}</a>`
-            ).join('');
-            
-            footerPreview.innerHTML = `
-                <div style="text-align: center; margin-bottom: 10px;">
-                    ${linksHTML}
+                    <div class="ad-rate-display">$${slot.cpmRate} CPM</div>
                 </div>
-                <div style="text-align: center; color: #666; font-size: 0.85rem;">
-                    ${document.getElementById('footerText').value}
+                <div class="ad-slot-details">
+                    <div>Dimensions: ${slot.dimensions}</div>
+                    <div>Priority: ${slot.priority}</div>
+                    <div>Created: ${new Date(slot.createdAt).toLocaleDateString()}</div>
+                </div>
+                <div class="ad-slot-actions">
+                    <button class="btn btn-sm btn-primary" onclick="editAdSlot(${slot.id})">Edit</button>
+                    <button class="btn btn-sm btn-warning" onclick="toggleAdSlot(${slot.id})">${slot.status === 'active' ? 'Deactivate' : 'Activate'}</button>
+                    <button class="btn btn-sm btn-danger" onclick="deleteAdSlot(${slot.id})">Delete</button>
                 </div>
             `;
+            
+            adSlotsContainer.appendChild(slotElement);
         }
-
-        function saveFooterSettings() {
-            try {
-                AdminState.adminData.footerSettings.text = document.getElementById('footerText').value;
-                AdminState.adminData.footerSettings.links = AdminState.footerLinks;
-                
-                localStorage.setItem('aiHugMeAdminData', JSON.stringify(AdminState.adminData));
-                
-                // Also save to site settings for frontend
-                const siteSettings = JSON.parse(localStorage.getItem('aiHugMeSiteSettings') || '{}');
-                siteSettings.footerText = AdminState.adminData.footerSettings.text;
-                siteSettings.footerLinks = AdminState.adminData.footerSettings.links.map(link => 
-                    `<a href="${link.href}" id="${link.id}">${link.text}</a>`
-                ).join('');
-                localStorage.setItem('aiHugMeSiteSettings', JSON.stringify(siteSettings));
-                
-                showTemporaryMessage('✅ Footer settings saved successfully!', 'success');
-            } catch (error) {
-                console.error('Error saving footer settings:', error);
-                showTemporaryMessage('❌ Error saving footer settings', 'error');
+        
+        // Preview external image
+        function previewExternalImage() {
+            const imageUrl = externalImageUrl.value;
+            
+            if (!imageUrl) {
+                alert('Please enter an image URL');
+                return;
             }
+            
+            imagePreview.innerHTML = `<img src="${imageUrl}" alt="Ad Preview" class="image-preview" onerror="this.style.display='none'; imagePreview.innerHTML='Failed to load image. Please check the URL.'">`;
         }
-
-        function applySiteSettings() {
-            try {
-                const siteTitle = document.getElementById('siteTitle').value;
-                const siteTagline = document.getElementById('siteTagline').value;
-                const themeColor = document.getElementById('themeColor').value;
-                const newPassword = document.getElementById('newPassword').value;
-                
-                const settings = {
-                    siteTitle,
-                    siteTagline,
-                    themeColor,
-                    features: {
-                        enableSpecialEvents: document.getElementById('enableSpecialEvents').checked,
-                        enableSocialSharing: document.getElementById('enableSocialSharing').checked,
-                        enableViralFeatures: document.getElementById('enableViralFeatures').checked,
-                        enableUserTracking: document.getElementById('enableUserTracking').checked
-                    },
-                    updatedAt: new Date().toISOString()
-                };
-                
-                if (newPassword) {
-                    AdminState.adminData.password = newPassword;
-                    localStorage.setItem('aiHugMeAdminData', JSON.stringify(AdminState.adminData));
-                    document.getElementById('newPassword').value = '';
-                }
-                
-                localStorage.setItem('aiHugMeSiteSettings', JSON.stringify(settings));
-                showTemporaryMessage('✅ Site settings applied successfully!', 'success');
-                
-            } catch (error) {
-                console.error('Error applying site settings:', error);
-                showTemporaryMessage('❌ Error applying site settings', 'error');
+        
+        // Save image ad
+        function saveImageAd() {
+            const imageUrl = externalImageUrl.value;
+            const destinationUrl = document.getElementById('destinationUrl').value;
+            
+            if (!imageUrl || !destinationUrl) {
+                alert('Please fill in both image URL and destination URL');
+                return;
             }
+            
+            // In a real app, this would save to a database
+            alert('Image ad saved successfully!');
+            
+            // Clear form
+            externalImageUrl.value = '';
+            document.getElementById('destinationUrl').value = '';
+            imagePreview.innerHTML = 'Image preview will appear here';
         }
-
-        function resetSiteSettings() {
-            if (confirm('Reset all site settings to default?')) {
-                localStorage.removeItem('aiHugMeSiteSettings');
-                loadCurrentSettings();
-                showTemporaryMessage('✅ Site settings reset to default!', 'success');
-            }
-        }
-
-        function loadCurrentSettings() {
-            try {
-                const settings = JSON.parse(localStorage.getItem('aiHugMeSiteSettings') || '{}');
-                
-                if (settings.siteTitle) document.getElementById('siteTitle').value = settings.siteTitle;
-                if (settings.siteTagline) document.getElementById('siteTagline').value = settings.siteTagline;
-                if (settings.themeColor) document.getElementById('themeColor').value = settings.themeColor;
-                
-                if (settings.features) {
-                    document.getElementById('enableSpecialEvents').checked = settings.features.enableSpecialEvents !== false;
-                    document.getElementById('enableSocialSharing').checked = settings.features.enableSocialSharing !== false;
-                    document.getElementById('enableViralFeatures').checked = settings.features.enableViralFeatures !== false;
-                    document.getElementById('enableUserTracking').checked = settings.features.enableUserTracking !== false;
-                }
-                
-                // Load page content
-                if (AdminState.adminData.pageContent) {
-                    document.getElementById('aboutPageContent').value = AdminState.adminData.pageContent.about;
-                    document.getElementById('termsPageContent').value = AdminState.adminData.pageContent.terms;
-                    document.getElementById('privacyPageContent').value = AdminState.adminData.pageContent.privacy;
-                    document.getElementById('contactPageContent').value = AdminState.adminData.pageContent.contact;
-                }
-                
-            } catch (error) {
-                console.error('Error loading current settings:', error);
-            }
-        }
-
-        function savePageContent() {
-            try {
-                AdminState.adminData.pageContent = {
-                    about: document.getElementById('aboutPageContent').value,
-                    terms: document.getElementById('termsPageContent').value,
-                    privacy: document.getElementById('privacyPageContent').value,
-                    contact: document.getElementById('contactPageContent').value
-                };
-                
-                localStorage.setItem('aiHugMeAdminData', JSON.stringify(AdminState.adminData));
-                
-                // Also save to separate storage for frontend
-                localStorage.setItem('aiHugMePageContent', JSON.stringify(AdminState.adminData.pageContent));
-                
-                showTemporaryMessage('✅ Page content saved successfully!', 'success');
-                
-            } catch (error) {
-                console.error('Error saving page content:', error);
-                showTemporaryMessage('❌ Error saving page content', 'error');
-            }
-        }
-
-        // Page management quick actions
-        function loadAllPages() {
-            loadCurrentSettings();
-            showTemporaryMessage('✅ All pages loaded from storage!', 'success');
-        }
-
-        function saveAllPages() {
-            savePageContent();
-        }
-
-        function resetPages() {
-            if (confirm('Reset all page content to default?')) {
-                initializeAdminData();
-                loadCurrentSettings();
-                showTemporaryMessage('✅ All pages reset to default!', 'success');
-            }
-        }
-
-        function previewPages() {
-            showTemporaryMessage('👁️ Preview feature would open in new tab', 'success');
-        }
-
-        function searchUsers() {
-            const query = document.getElementById('userSearch').value;
-            if (query) {
-                showTemporaryMessage(`🔍 Searching for: ${query}`, 'success');
-            }
-        }
-
-        function refreshStats() {
-            updateDashboardStats();
-            showTemporaryMessage('✅ Stats refreshed!', 'success');
-        }
-
-        function exportReport() {
-            const reportData = {
-                timestamp: new Date().toISOString(),
-                totalHugs: document.getElementById('totalHugs').textContent,
-                activeUsers: document.getElementById('activeUsers').textContent,
-                totalRevenue: document.getElementById('todayRevenue').textContent
+        
+        // Save site settings
+        function saveSiteSettings() {
+            const settings = {
+                siteTitle: document.getElementById('siteTitle').value,
+                siteTagline: document.getElementById('siteTagline').value,
+                themeColor: document.getElementById('themeColor').value,
+                enableSpecialEvents: document.getElementById('enableSpecialEvents').checked,
+                enableSocialSharing: document.getElementById('enableSocialSharing').checked,
+                enableViralFeatures: document.getElementById('enableViralFeatures').checked,
+                enableUserTracking: document.getElementById('enableUserTracking').checked
             };
             
-            const dataStr = JSON.stringify(reportData, null, 2);
-            const dataBlob = new Blob([dataStr], { type: 'application/json' });
-            const url = URL.createObjectURL(dataBlob);
-            const link = document.createElement('a');
-            link.href = url;
-            link.download = `ai-hug-me-report-${new Date().toISOString().split('T')[0]}.json`;
-            link.click();
+            // Save to localStorage
+            localStorage.setItem('siteSettings', JSON.stringify(settings));
             
-            showTemporaryMessage('✅ Report exported successfully!', 'success');
+            // Show success message
+            const successMessage = document.getElementById('settingsSuccess');
+            successMessage.classList.remove('hidden');
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 3000);
         }
-
-        // Enhanced charts initialization
-        function initializeCharts() {
-            try {
-                // Real-time chart
-                const realtimeCtx = document.getElementById('realtimeChart');
-                if (realtimeCtx) {
-                    if (AdminState.charts.realtime) {
-                        AdminState.charts.realtime.destroy();
-                    }
-                    
-                    AdminState.charts.realtime = new Chart(realtimeCtx.getContext('2d'), {
-                        type: 'line',
-                        data: {
-                            labels: Array.from({length: 12}, (_, i) => `${i*2}:00`),
-                            datasets: [{
-                                label: 'Hugs per 2 Hours',
-                                data: Array.from({length: 12}, () => Math.floor(Math.random() * 50) + 10),
-                                borderColor: '#ff6b6b',
-                                backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                                tension: 0.4,
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false,
-                            plugins: { 
-                                legend: { display: false },
-                                title: { display: false }
-                            }
-                        }
-                    });
-                }
+        
+        // Save footer settings
+        function saveFooterSettings() {
+            // In a real app, this would save to a database
+            const successMessage = document.getElementById('footerSuccess');
+            successMessage.classList.remove('hidden');
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Save page content
+        function savePageContent() {
+            // In a real app, this would save to a database
+            const successMessage = document.getElementById('pageSuccess');
+            successMessage.classList.remove('hidden');
+            setTimeout(() => {
+                successMessage.classList.add('hidden');
+            }, 3000);
+        }
+        
+        // Save ad settings
+        function saveAdSettings() {
+            // In a real app, this would save all ad settings to a database
+            alert('All ad settings saved successfully!');
+        }
+        
+        // Reset site settings to defaults
+        function resetSiteSettings() {
+            if (confirm('Are you sure you want to reset all site settings to defaults?')) {
+                document.getElementById('siteTitle').value = 'AI Hug Me';
+                document.getElementById('siteTagline').value = 'Get a completely AI-powered virtual hug!';
+                document.getElementById('themeColor').value = 'default';
+                document.getElementById('enableSpecialEvents').checked = true;
+                document.getElementById('enableSocialSharing').checked = true;
+                document.getElementById('enableViralFeatures').checked = true;
+                document.getElementById('enableUserTracking').checked = true;
                 
-                // Enhanced analytics chart
-                const analyticsCtx = document.getElementById('analyticsChart');
-                if (analyticsCtx) {
-                    if (AdminState.charts.analytics) {
-                        AdminState.charts.analytics.destroy();
-                    }
-                    
-                    AdminState.charts.analytics = new Chart(analyticsCtx.getContext('2d'), {
-                        type: 'bar',
-                        data: {
-                            labels: ['Hugs', 'Sessions', 'Users', 'Revenue', 'Ads'],
-                            datasets: [{
-                                label: 'Today',
-                                data: [125, 89, 45, 12.50, 23],
-                                backgroundColor: '#6a11cb'
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-                }
+                localStorage.removeItem('siteSettings');
                 
-                // User growth chart
-                const userGrowthCtx = document.getElementById('userGrowthChart');
-                if (userGrowthCtx) {
-                    if (AdminState.charts.userGrowth) {
-                        AdminState.charts.userGrowth.destroy();
-                    }
-                    
-                    AdminState.charts.userGrowth = new Chart(userGrowthCtx.getContext('2d'), {
-                        type: 'line',
-                        data: {
-                            labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-                            datasets: [{
-                                label: 'New Users',
-                                data: [45, 62, 78, 95, 112, 145],
-                                borderColor: '#28a745',
-                                backgroundColor: 'rgba(40, 167, 69, 0.1)',
-                                fill: true
-                            }]
-                        },
-                        options: {
-                            responsive: true,
-                            maintainAspectRatio: false
-                        }
-                    });
-                }
-            } catch (error) {
-                console.error("Chart initialization error:", error);
+                alert('Site settings have been reset to defaults.');
             }
         }
-
-        // Make functions available globally
-        window.toggleAdSlot = toggleAdSlot;
-        window.deleteAdSlot = deleteAdSlot;
-        window.switchTab = switchTab;
-        window.loadAllPages = loadAllPages;
-        window.saveAllPages = saveAllPages;
-        window.resetPages = resetPages;
-        window.previewPages = previewPages;
-        window.searchUsers = searchUsers;
-        window.refreshStats = refreshStats;
-        window.exportReport = exportReport;
-        window.addFooterLink = addFooterLink;
-        window.removeFooterLink = removeFooterLink;
-        window.updateFooterLink = updateFooterLink;
-        window.moveFooterLinkUp = moveFooterLinkUp;
-        window.moveFooterLinkDown = moveFooterLinkDown;
+        
+        // Reset ad settings to defaults
+        function resetAdSettings() {
+            if (confirm('Are you sure you want to reset all ad settings to defaults?')) {
+                document.getElementById('adsensePublisherId').value = '';
+                document.getElementById('defaultCpmRate').value = '2.50';
+                document.getElementById('directAdvertisers').value = '';
+                
+                // Clear ad slots
+                adSlotsContainer.innerHTML = '';
+                localStorage.removeItem('adSlots');
+                
+                alert('Ad settings have been reset to defaults.');
+            }
+        }
+        
+        // Emergency shutdown
+        function emergencyShutdown() {
+            if (confirm('EMERGENCY: This will disable all site features. Are you sure?')) {
+                alert('Emergency shutdown activated. All site features have been disabled.');
+                // In a real app, this would trigger an API call to disable the site
+            }
+        }
+        
+        // Clear all data
+        function clearAllData() {
+            if (confirm('WARNING: This will delete ALL data including users, analytics, and settings. This cannot be undone. Are you sure?')) {
+                localStorage.clear();
+                alert('All data has been cleared. The page will now reload.');
+                location.reload();
+            }
+        }
+        
+        // Export ad data
+        function exportAdData() {
+            alert('Ad data exported successfully!');
+            // In a real app, this would generate and download a CSV file
+        }
+        
+        // Ad slot management functions (stubs for demo)
+        function editAdSlot(id) {
+            alert(`Editing ad slot with ID: ${id}`);
+        }
+        
+        function toggleAdSlot(id) {
+            alert(`Toggling ad slot with ID: ${id}`);
+        }
+        
+        function deleteAdSlot(id) {
+            if (confirm('Are you sure you want to delete this ad slot?')) {
+                alert(`Deleted ad slot with ID: ${id}`);
+            }
+        }
+        
+        // Initialize the application when the page loads
+        window.addEventListener('DOMContentLoaded', init);
     </script>
-
-    <!-- Load analytics manager -->
-    <script src="analytics-manager.js"></script>
 </body>
 </html>
