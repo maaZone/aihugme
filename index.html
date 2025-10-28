@@ -5,13 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Hug Me - Get Your AI-Powered Virtual Hug!</title>
     
-    <!-- Firebase SDK -->
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.1/firebase-auth-compat.js"></script>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
     
     <style>
-        /* Existing CSS remains exactly the same - no changes */
         :root {
             --primary: #ff6b6b;
             --secondary: #6a11cb;
@@ -37,14 +40,675 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 20px;
+            padding: 15px;
             color: var(--dark);
             transition: all 0.3s ease;
         }
         
-        /* ALL EXISTING CSS REMAINS EXACTLY THE SAME */
-        /* ... (complete existing CSS code) ... */
+        .container {
+            width: 100%;
+            max-width: 800px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            margin: 15px 0;
+        }
         
+        header {
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2rem;
+            margin-bottom: 8px;
+            line-height: 1.2;
+        }
+        
+        .tagline {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+        
+        .user-section {
+            padding: 25px 20px;
+        }
+        
+        .hug-section {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .hug-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+            color: var(--secondary);
+            line-height: 1.3;
+        }
+        
+        .hug-section p {
+            font-size: 0.95rem;
+            margin-bottom: 15px;
+            color: var(--gray);
+            line-height: 1.4;
+        }
+        
+        .hug-display {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border-radius: 15px;
+            padding: 25px 20px;
+            margin: 15px 0;
+            color: white;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mood-indicator {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+        
+        .hug-animation {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            transition: all 0.5s ease;
+        }
+        
+        .hug-message {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 8px;
+            line-height: 1.3;
+            text-align: center;
+        }
+        
+        .hug-details {
+            font-size: 1rem;
+            margin-bottom: 12px;
+            opacity: 0.9;
+            line-height: 1.4;
+            text-align: center;
+        }
+        
+        .hug-button {
+            background: linear-gradient(135deg, var(--primary) 0%, #ff8e53 100%);
+            color: white;
+            border: none;
+            padding: 16px 35px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            margin: 15px 0;
+            width: 100%;
+            max-width: 300px;
+        }
+        
+        .hug-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+        }
+        
+        .hug-button:active {
+            transform: translateY(0);
+        }
+        
+        .social-sharing {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 15px;
+            flex-wrap: wrap;
+        }
+        
+        .social-btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.9rem;
+            flex: 1;
+            min-width: 0;
+            justify-content: center;
+        }
+        
+        .social-btn.facebook {
+            background: #1877F2;
+            color: white;
+        }
+        
+        .social-btn.twitter {
+            background: #1DA1F2;
+            color: white;
+        }
+        
+        .social-btn.whatsapp {
+            background: #25D366;
+            color: white;
+        }
+        
+        .social-btn.copy-link {
+            background: var(--gray);
+            color: white;
+        }
+        
+        .social-btn:hover {
+            transform: translateY(-2px);
+            opacity: 0.9;
+        }
+        
+        .viral-feature {
+            background: var(--light);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 25px;
+        }
+        
+        .viral-title {
+            font-size: 1.3rem;
+            margin-bottom: 12px;
+            color: var(--secondary);
+        }
+        
+        .viral-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 15px;
+        }
+        
+        .viral-stat {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--secondary);
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 5px;
+        }
+        
+        footer {
+            background: var(--light);
+            padding: 20px;
+            text-align: center;
+            border-top: 1px solid #eee;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            text-decoration: underline;
+        }
+        
+        footer p {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .hidden {
+            display: none !important;
+        }
+        
+        .ad-container {
+            margin: 8px 0;
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: center;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            padding: 15px;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+        }
+        
+        .modal-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--secondary);
+            text-align: center;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-weight: 500;
+            color: var(--dark);
+            font-size: 0.95rem;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border 0.3s;
+        }
+        
+        .form-control:focus {
+            border-color: var(--secondary);
+            outline: none;
+        }
+        
+        .btn {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-secondary {
+            background: var(--secondary);
+            color: white;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+        
+        .btn-danger {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-sm {
+            padding: 8px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .success-message {
+            background: rgba(40, 167, 69, 0.1);
+            border: 1px solid var(--success);
+            color: var(--success);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .error-message {
+            background: rgba(220, 53, 69, 0.1);
+            border: 1px solid var(--danger);
+            color: var(--danger);
+            padding: 10px 15px;
+            border-radius: 8px;
+            margin: 12px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9rem;
+        }
+        
+        .ai-sound-toggle {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            font-size: 0.9rem;
+        }
+        
+        .live-users {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+            z-index: 100;
+        }
+        
+        /* Animation classes */
+        .ai-hug-animation {
+            animation: hugPulse 2s infinite;
+        }
+        
+        @keyframes hugPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+        
+        .particle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: currentColor;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.7;
+        }
+        
+        /* Theme variations */
+        .theme-blue {
+            --primary: #4dabf7;
+            --secondary: #339af0;
+        }
+        
+        .theme-green {
+            --primary: #51cf66;
+            --secondary: #40c057;
+        }
+        
+        .theme-purple {
+            --primary: #cc5de8;
+            --secondary: #9c36b5;
+        }
+        
+        .theme-dark {
+            --primary: #495057;
+            --secondary: #343a40;
+            --light: #495057;
+            --dark: #f8f9fa;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid var(--secondary);
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 10px auto;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Page Content Styles */
+        .page-content {
+            padding: 20px;
+            background: white;
+            border-radius: 15px;
+            margin: 15px 0;
+        }
+        
+        .page-content h3 {
+            color: var(--secondary);
+            margin-bottom: 15px;
+            font-size: 1.5rem;
+        }
+        
+        .page-content p {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .back-to-main {
+            background: var(--secondary);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        /* Mobile-First Responsive Design */
+        @media (max-width: 480px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 10px 0;
+                border-radius: 15px;
+            }
+            
+            header {
+                padding: 20px 15px;
+            }
+            
+            header h1 {
+                font-size: 1.7rem;
+            }
+            
+            .tagline {
+                font-size: 0.9rem;
+            }
+            
+            .user-section {
+                padding: 20px 15px;
+            }
+            
+            .hug-section h2 {
+                font-size: 1.3rem;
+            }
+            
+            .hug-display {
+                padding: 20px 15px;
+                min-height: 240px;
+            }
+            
+            .mood-indicator {
+                font-size: 2.5rem;
+            }
+            
+            .hug-animation {
+                font-size: 2rem;
+            }
+            
+            .hug-message {
+                font-size: 1.1rem;
+            }
+            
+            .hug-details {
+                font-size: 0.9rem;
+            }
+            
+            .hug-button {
+                padding: 14px 25px;
+                font-size: 1rem;
+                max-width: 100%;
+            }
+            
+            .social-sharing {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .social-btn {
+                width: 100%;
+            }
+            
+            .viral-stats {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            
+            .viral-stat {
+                padding: 12px;
+            }
+            
+            .stat-value {
+                font-size: 1.3rem;
+            }
+            
+            .footer-links {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .ai-sound-toggle {
+                bottom: 10px;
+                right: 10px;
+                padding: 8px 12px;
+                font-size: 0.8rem;
+            }
+            
+            .live-users {
+                top: 10px;
+                right: 10px;
+                padding: 5px 10px;
+                font-size: 0.75rem;
+            }
+            
+            .modal-content {
+                padding: 15px;
+            }
+        }
+        
+        @media (max-width: 360px) {
+            header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .hug-display {
+                min-height: 220px;
+                padding: 15px 12px;
+            }
+            
+            .mood-indicator {
+                font-size: 2rem;
+            }
+            
+            .hug-animation {
+                font-size: 1.8rem;
+            }
+            
+            .viral-feature {
+                padding: 15px;
+            }
+        }
+        
+        /* Tablet and Desktop Optimizations */
+        @media (min-width: 768px) {
+            .hug-button {
+                width: auto;
+            }
+            
+            .social-sharing {
+                flex-direction: row;
+            }
+            
+            .social-btn {
+                flex: 0 1 auto;
+                min-width: 120px;
+            }
+        }
+        
+        /* Extra small devices */
+        @media (max-width: 320px) {
+            body {
+                padding: 8px;
+            }
+            
+            .container {
+                border-radius: 12px;
+            }
+            
+            header {
+                padding: 15px 12px;
+            }
+            
+            .user-section {
+                padding: 15px 12px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -64,13 +728,8 @@
                     <h2>Need an AI-powered hug? 🤖</h2>
                     <p>Every click generates a unique AI-powered hug with animations and sounds!</p>
                     
-                    <!-- Firebase Status Indicator -->
-                    <div id="firebaseStatus" class="hidden" style="background: var(--success); color: white; padding: 8px; border-radius: 5px; margin: 10px 0; text-align: center;">
-                        🔥 Firebase Connected - Real-time Analytics Active
-                    </div>
-                    
-                    <!-- Middle Banner Ad -->
-                    <div id="middleBanner" class="ad-container hidden"></div>
+                    <!-- Loading Spinner -->
+                    <div id="loadingSpinner" class="loading-spinner hidden"></div>
                     
                     <div class="hug-display" id="hugDisplay">
                         <div class="mood-indicator" id="moodIndicator">🤖</div>
@@ -86,7 +745,7 @@
                         
                         <!-- User Stats -->
                         <div class="user-stats" id="userStats" style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-                            <div style="font-size: 0.8rem; color: #666;">
+                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.8); text-align: center;">
                                 Your Stats: <span id="userHugCount">0</span> hugs • Favorite: <span id="userFavoriteHug">None yet</span>
                             </div>
                         </div>
@@ -111,12 +770,12 @@
                     <button class="hug-button" id="hugButton">🤖 Generate AI Hug! 🎲</button>
                     
                     <!-- User Controls -->
-                    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
-                        <button class="btn btn-sm" id="toggleSound" style="padding: 8px 15px; background: var(--secondary); color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    <div style="display: flex; gap: 8px; justify-content: center; margin-top: 15px; flex-wrap: wrap;">
+                        <button class="btn btn-sm" id="toggleSound" style="padding: 8px 15px; background: var(--secondary); color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem;">
                             🔊 Sound: On
                         </button>
-                        <button class="btn btn-sm" id="userSettings" style="padding: 8px 15px; background: var(--gray); color: white; border: none; border-radius: 5px; cursor: pointer;">
-            ️            ⚙️ Settings
+                        <button class="btn btn-sm" id="userSettings" style="padding: 8px 15px; background: var(--gray); color: white; border: none; border-radius: 5px; cursor: pointer; font-size: 0.9rem;">
+                            ⚙️ Settings
                         </button>
                     </div>
                 </div>
@@ -153,38 +812,12 @@
         <div id="footerBanner" class="ad-container hidden"></div>
         
         <footer>
-            <div class="footer-links">
-                <a href="#" id="aboutLink">About AI Hugs</a>
-                <a href="#" id="privacyLink">Privacy Policy</a>
-                <a href="#" id="termsLink">Terms & Conditions</a>
-                <a href="#" id="contactLink">Contact Us</a>
+            <div class="footer-links" id="footerLinks">
+                <!-- Footer links will be loaded from admin settings -->
             </div>
-            <p>© 2025 AI Hug Me. All Rights Reserved.</p>
-            <p>Powered by Advanced AI Technology 🤖 + Firebase 🔥</p>
+            <p id="footerText">© 2025 AI Hug Me. All Rights Reserved.</p>
+            <p>Powered by Advanced AI Technology 🤖</p>
         </footer>
-    </div>
-    
-    <!-- Sidebar Ad (Fixed Position) -->
-    <div id="sidebarAd" class="hidden"></div>
-    
-    <!-- Popup Ad (Will be shown modally) -->
-    <div id="popupAd" class="hidden"></div>
-    
-    <!-- Video Ad Modal -->
-    <div id="videoAdModal" class="modal hidden">
-        <div class="modal-content">
-            <button class="ad-close" id="closeVideoAd">&times;</button>
-            <div class="video-ad-container">
-                <video id="videoAdPlayer" class="video-ad" controls>
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-controls">
-                    <button class="btn btn-primary" id="playVideo">Play</button>
-                    <button class="btn btn-secondary" id="pauseVideo">Pause</button>
-                    <button class="btn btn-success" id="skipAd">Skip in <span id="skipTimer">5</span>s</button>
-                </div>
-            </div>
-        </div>
     </div>
     
     <!-- Settings Modal -->
@@ -214,7 +847,7 @@
                     <label>Your User ID (for support)</label>
                     <input type="text" class="form-control" id="userIdDisplay" readonly>
                 </div>
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
+                <div style="display: flex; gap: 10px; margin-top: 20px; flex-wrap: wrap;">
                     <button class="btn btn-primary" id="exportData">Export My Data</button>
                     <button class="btn btn-danger" id="clearData">Clear All Data</button>
                 </div>
@@ -227,7 +860,7 @@
     
     <!-- Live Users Counter -->
     <div class="live-users" id="liveUsersCounter">
-        <span>👥 Live Users: <span id="liveUsersCount">0</span></span>
+        <span>👥 Live: <span id="liveUsersCount">0</span></span>
     </div>
     
     <!-- Success/Error Messages -->
@@ -241,105 +874,478 @@
         <span id="errorText">AI is learning... Try again!</span>
     </div>
 
-    <!-- Firebase Configuration -->
-    <script src="firebase-config.js"></script>
-    <script src="firebase-db.js"></script>
-    <script src="analytics-manager.js"></script>
-    <script src="user-manager.js"></script>
-
+    <!-- INITIALIZATION SCRIPT -->
     <script>
-        // Enhanced Main Application with Firebase Integration
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('🚀 AI Hug Me - Firebase Enhanced Version Loading...');
-            
-            // Initialize Firebase first
-            initializeFirebaseApp();
-            
-            // Load existing systems
-            loadUserData();
-            setupEventListeners();
-            AdManager.init();
-            PageManager.init();
-            AISoundSystem.init();
-            loadSiteSettings();
-            updateLiveUsers();
-            
-            // Update UI with real user data
-            updateUserStatsUI();
-            
-            // Show welcome message
-            setTimeout(() => {
-                showSuccess('Welcome to AI Hug Me! Firebase analytics active 🔥');
-            }, 1000);
-        });
-
-        // Initialize Firebase Application
-        function initializeFirebaseApp() {
-            // Check if Firebase initialized successfully
-            setTimeout(() => {
-                if (window.firebaseApp && window.firebaseApp.isInitialized) {
-                    document.getElementById('firebaseStatus').classList.remove('hidden');
-                    console.log('✅ Firebase integration active');
-                    
-                    // Track app load
-                    window.analyticsManager.trackEvent('app_loaded', {
-                        version: '2.0.0',
-                        firebase: true,
-                        features: ['analytics', 'user_tracking', 'real_time']
-                    });
-                } else {
-                    console.log('⚠️ Using localStorage fallback');
+        // Enhanced Initialization sequence - runs immediately when page loads
+        console.log('🚀 AI Hug Me - Starting enhanced initialization...');
+        
+        // Global variables for core systems
+        window.AIHugEngine = {
+            generateAIHug: function() {
+                const hugTypes = ['emotional', 'energetic', 'calming', 'playful', 'supportive', 'celebratory', 'comforting'];
+                const animations = ['✨', '🌟', '💫', '🎊', '🎉', '💖', '🤗', '🫂', '💝', '🎈'];
+                const messages = [
+                    "AI is sending you warm virtual hugs!",
+                    "Your personalized AI hug is here!",
+                    "Digital comfort delivered with care!",
+                    "Feel the AI-powered warmth!",
+                    "Virtual embrace activated!",
+                    "AI compassion module engaged!",
+                    "Sending digital love your way!",
+                    "Hug algorithms optimized for you!"
+                ];
+                
+                const randomType = hugTypes[Math.floor(Math.random() * hugTypes.length)];
+                const randomAnimation = animations[Math.floor(Math.random() * animations.length)];
+                const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+                
+                return {
+                    type: randomType,
+                    name: `${randomType} AI Hug`,
+                    animation: randomAnimation,
+                    message: randomMessage,
+                    detail: `This ${randomType} hug was generated with advanced AI algorithms`,
+                    intensity: `${Math.floor(Math.random() * 10) + 1}/10 intensity`,
+                    aiConfidence: `${Math.floor(Math.random() * 30) + 70}%`,
+                    soundPattern: Math.random() > 0.5 ? 'gentle' : 'energetic',
+                    color: `hsl(${Math.random() * 360}, 70%, 60%)`,
+                    effect: 'ai-hug-animation',
+                    timestamp: new Date().toISOString()
+                };
+            }
+        };
+        
+        window.AISoundSystem = {
+            init: function() {
+                console.log('🔊 AI Sound System initialized');
+                // Initialize Web Audio API if available
+                try {
+                    this.audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                    console.log('✅ Web Audio API initialized');
+                } catch (error) {
+                    console.warn('⚠️ Web Audio API not available');
+                    this.audioContext = null;
                 }
-            }, 2000);
+            },
+            
+            playAISound: function(pattern) {
+                try {
+                    if (!window.userManager?.userData?.soundEnabled) {
+                        return; // Sound disabled
+                    }
+                    
+                    console.log(`Playing ${pattern} AI sound pattern`);
+                    
+                    // Simple beep sounds using Web Audio API
+                    if (this.audioContext) {
+                        const oscillator = this.audioContext.createOscillator();
+                        const gainNode = this.audioContext.createGain();
+                        
+                        oscillator.connect(gainNode);
+                        gainNode.connect(this.audioContext.destination);
+                        
+                        if (pattern === 'gentle') {
+                            oscillator.frequency.value = 400;
+                            gainNode.gain.value = 0.1;
+                            oscillator.type = 'sine';
+                        } else {
+                            oscillator.frequency.value = 600;
+                            gainNode.gain.value = 0.2;
+                            oscillator.type = 'square';
+                        }
+                        
+                        oscillator.start();
+                        gainNode.gain.exponentialRampToValueAtTime(0.001, this.audioContext.currentTime + 0.5);
+                        oscillator.stop(this.audioContext.currentTime + 0.5);
+                    }
+                } catch (error) {
+                    console.warn('Sound playback failed:', error);
+                }
+            }
+        };
+        
+        window.AIParticleSystem = {
+            createParticles: function(count, color, container) {
+                try {
+                    for (let i = 0; i < count; i++) {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        particle.style.color = color;
+                        particle.style.left = `${Math.random() * 100}%`;
+                        particle.style.top = `${Math.random() * 100}%`;
+                        particle.style.animation = `float ${Math.random() * 3 + 2}s linear infinite`;
+                        particle.style.width = `${Math.random() * 8 + 4}px`;
+                        particle.style.height = particle.style.width;
+                        container.appendChild(particle);
+                        
+                        // Remove particle after animation
+                        setTimeout(() => {
+                            if (particle.parentNode) {
+                                particle.parentNode.removeChild(particle);
+                            }
+                        }, 3000);
+                    }
+                } catch (error) {
+                    console.warn('Particle system error:', error);
+                }
+            }
+        };
+        
+        // Enhanced utility functions
+        function showSuccess(message) {
+            try {
+                const successElement = document.getElementById('successMessage');
+                const successText = document.getElementById('successText');
+                if (successElement && successText) {
+                    successText.textContent = message;
+                    successElement.classList.remove('hidden');
+                    setTimeout(() => {
+                        successElement.classList.add('hidden');
+                    }, 3000);
+                }
+            } catch (error) {
+                console.warn('Error showing success message:', error);
+            }
         }
-
-        // Update UI with user statistics
-        function updateUserStatsUI() {
-            const userStats = window.userManager.getUserStats();
-            
-            document.getElementById('userHugCount').textContent = userStats.totalHugs;
-            document.getElementById('userFavoriteHug').textContent = userStats.favoriteHugType;
-            document.getElementById('totalShares').textContent = userStats.totalHugs;
-            document.getElementById('viralScore').textContent = userStats.totalHugs * 10;
-            
-            // Update sound toggle button
-            const soundBtn = document.getElementById('toggleSound');
-            if (soundBtn) {
-                soundBtn.innerHTML = userStats.soundEnabled ? '🔊 Sound: On' : '🔇 Sound: Off';
-            }
-            
-            // Set theme select
-            const themeSelect = document.getElementById('themeSelect');
-            if (themeSelect) {
-                themeSelect.value = userStats.theme;
-            }
-            
-            // Set user ID display
-            const userIdDisplay = document.getElementById('userIdDisplay');
-            if (userIdDisplay) {
-                userIdDisplay.value = window.userManager.userId;
+        
+        function showError(message) {
+            try {
+                const errorElement = document.getElementById('errorMessage');
+                const errorText = document.getElementById('errorText');
+                if (errorElement && errorText) {
+                    errorText.textContent = message;
+                    errorElement.classList.remove('hidden');
+                    setTimeout(() => {
+                        errorElement.classList.add('hidden');
+                    }, 3000);
+                }
+            } catch (error) {
+                console.warn('Error showing error message:', error);
             }
         }
+        
+        function showLoading(show) {
+            const spinner = document.getElementById('loadingSpinner');
+            const hugButton = document.getElementById('hugButton');
+            
+            if (spinner) {
+                spinner.classList.toggle('hidden', !show);
+            }
+            if (hugButton) {
+                hugButton.disabled = show;
+                hugButton.textContent = show ? 'Generating AI Hug...' : '🤖 Generate AI Hug! 🎲';
+            }
+        }
+        
+        function getAIMood() {
+            const moods = ['🤖', '😊', '🌟', '💫', '🎯', '🔮', '🧠', '💖', '💝', '🎈'];
+            return moods[Math.floor(Math.random() * moods.length)];
+        }
+        
+        function generateAICombo() {
+            const combos = ['AI+Love', 'Tech+Care', 'Digital+Hug', 'Virtual+Warmth', 'Algorithm+Affection', 'Code+Comfort'];
+            return combos[Math.floor(Math.random() * combos.length)];
+        }
+        
+        // Enhanced user data management
+        function updateUserStatsUI(userData = null) {
+            try {
+                const data = userData || (window.userManager ? window.userManager.getUserStats() : { totalHugs: 0, favoriteHugType: 'None yet' });
+                
+                const userHugCount = document.getElementById('userHugCount');
+                const userFavoriteHug = document.getElementById('userFavoriteHug');
+                const totalShares = document.getElementById('totalShares');
+                const viralScore = document.getElementById('viralScore');
+                
+                if (userHugCount) userHugCount.textContent = data.totalHugs || 0;
+                if (userFavoriteHug) userFavoriteHug.textContent = data.favoriteHugType || 'None yet';
+                if (totalShares) totalShares.textContent = data.totalHugs || 0;
+                if (viralScore) viralScore.textContent = (data.totalHugs || 0) * 10;
+            } catch (error) {
+                console.warn('Error updating user stats UI:', error);
+            }
+        }
+        
+        function loadSiteSettings() {
+            try {
+                const settings = JSON.parse(localStorage.getItem('aiHugMeSiteSettings') || '{}');
+                
+                // Update site title and tagline
+                const siteTitle = document.getElementById('siteTitle');
+                const siteTagline = document.getElementById('siteTagline');
+                
+                if (siteTitle && settings.siteTitle) {
+                    siteTitle.textContent = settings.siteTitle;
+                }
+                if (siteTagline && settings.siteTagline) {
+                    siteTagline.textContent = settings.siteTagline;
+                }
+                
+                // Update footer
+                const footerLinks = document.getElementById('footerLinks');
+                const footerText = document.getElementById('footerText');
+                
+                if (footerLinks && settings.footerLinks) {
+                    footerLinks.innerHTML = settings.footerLinks;
+                    setupFooterNavigation();
+                }
+                
+                if (footerText && settings.footerText) {
+                    footerText.textContent = settings.footerText;
+                }
+                
+                // Apply theme
+                if (settings.themeColor && settings.themeColor !== 'default') {
+                    document.body.classList.add(`theme-${settings.themeColor}`);
+                }
+                
+            } catch (error) {
+                console.warn('Error loading site settings:', error);
+            }
+        }
+        
+        function setupFooterNavigation() {
+            // Setup footer navigation
+            const links = ['about', 'privacy', 'terms', 'contact'];
+            links.forEach(page => {
+                const link = document.getElementById(`${page}Link`);
+                const pageContent = document.getElementById(`${page}Page`);
+                const mainContent = document.getElementById('mainContent');
+                
+                if (link && pageContent && mainContent) {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        mainContent.classList.add('hidden');
+                        pageContent.classList.remove('hidden');
+                        // Load page content dynamically
+                        loadPageContent(page, pageContent);
+                    });
+                }
+            });
+        }
+        
+        function loadPageContent(page, container) {
+            try {
+                const pageContent = JSON.parse(localStorage.getItem('aiHugMePageContent') || '{}');
+                const defaultContent = {
+                    about: '<h3>About AI Hug Me</h3><p>Experience the future of emotional support with AI-powered virtual hugs!</p>',
+                    privacy: '<h3>Privacy Policy</h3><p>We value your privacy and protect your data.</p>',
+                    terms: '<h3>Terms & Conditions</h3><p>By using our service, you agree to our terms.</p>',
+                    contact: '<h3>Contact Us</h3><p>Get in touch with our team!</p>'
+                };
+                
+                const content = pageContent[page] || defaultContent[page] || '<p>Content loading...</p>';
+                
+                container.innerHTML = `
+                    <button class="back-to-main" onclick="showMainContent()">← Back to Main</button>
+                    ${content}
+                `;
+            } catch (error) {
+                console.error('Error loading page content:', error);
+                container.innerHTML = '<p>Error loading content</p>';
+            }
+        }
+        
+        function showMainContent() {
+            document.getElementById('mainContent').classList.remove('hidden');
+            ['aboutPage', 'privacyPage', 'termsPage', 'contactPage'].forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.classList.add('hidden');
+            });
+        }
+        
+        // FIXED: Update live users with accurate count
+        function updateLiveUsers() {
+            try {
+                const liveUsersCount = document.getElementById('liveUsersCount');
+                if (liveUsersCount && window.analyticsManager) {
+                    const accurateCount = window.analyticsManager.getLiveUserCount();
+                    liveUsersCount.textContent = accurateCount;
+                }
+            } catch (error) {
+                console.warn('Error updating live users:', error);
+                // Fallback
+                const liveUsersCount = document.getElementById('liveUsersCount');
+                if (liveUsersCount) {
+                    liveUsersCount.textContent = Math.floor(Math.random() * 15) + 8;
+                }
+            }
+        }
+        
+        // Enhanced hug generation system
+        async function generateAIHug() {
+            showLoading(true);
+            
+            try {
+                const aiHug = window.AIHugEngine.generateAIHug();
+                await updateHugDisplay(aiHug);
+                
+                // Record hug with user manager
+                if (window.userManager) {
+                    const result = await window.userManager.recordHug(aiHug);
+                    if (result.success) {
+                        updateUserStatsUI();
+                        showSuccess(`AI generated ${aiHug.name} successfully! 🧠`);
+                        
+                        // Track in Google Analytics
+                        if (window.analyticsManager) {
+                            window.analyticsManager.trackEvent('hug_generated', {
+                                hug_type: aiHug.type,
+                                hug_name: aiHug.name,
+                                ai_confidence: aiHug.aiConfidence
+                            });
+                        }
+                        
+                        // Play sound if enabled
+                        if (window.AISoundSystem && window.userManager.userData.soundEnabled) {
+                            window.AISoundSystem.playAISound(aiHug.soundPattern);
+                        }
+                    } else {
+                        showError('Failed to save hug data');
+                    }
+                } else {
+                    // Fallback without user manager
+                    updateUserStatsUI();
+                    showSuccess(`AI generated ${aiHug.name} successfully! 🧠`);
+                }
+                
+            } catch (error) {
+                console.error('AI hug generation failed:', error);
+                showError('AI is learning... Try again! 🤖');
+            } finally {
+                showLoading(false);
+            }
+        }
+        
+        async function updateHugDisplay(aiHug) {
+            const hugDisplay = document.getElementById('hugDisplay');
+            if (!hugDisplay) return;
 
-        // Enhanced Event Listeners with Firebase Tracking
+            try {
+                // Create enhanced hug display
+                const hugHTML = `
+                    <div class="mood-indicator" id="moodIndicator">${getAIMood()}</div>
+                    <div class="hug-animation ai-hug-animation" id="hugAnimation">${aiHug.animation}</div>
+                    <div class="hug-message" id="hugMessage">${aiHug.message}</div>
+                    <div class="hug-details" id="hugDetails">${aiHug.detail}</div>
+                    <div class="hug-intensity" style="margin: 5px 0; font-size: 0.9rem;">${aiHug.intensity}</div>
+                    <div class="ai-confidence" style="font-size: 0.8rem; opacity: 0.8;">AI Confidence: ${aiHug.aiConfidence}</div>
+                    <div class="hug-combo" id="hugCombo" style="margin: 10px 0; font-weight: bold; font-size: 0.9rem;">${generateAICombo()}</div>
+                    
+                    <!-- User Stats -->
+                    <div class="user-stats" id="userStats" style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
+                        <div style="font-size: 0.8rem; color: rgba(255,255,255,0.8); text-align: center;">
+                            Your Stats: <span id="userHugCount">${window.userManager ? window.userManager.userData.totalHugs : 0}</span> hugs • Favorite: <span id="userFavoriteHug">${window.userManager ? window.userManager.userData.favoriteHugType || 'None yet' : 'None yet'}</span>
+                        </div>
+                    </div>
+                    
+                    <div class="social-sharing" id="socialSharing">
+                        <button class="social-btn facebook" id="shareFacebook"><span>Facebook</span></button>
+                        <button class="social-btn twitter" id="shareTwitter"><span>Twitter</span></button>
+                        <button class="social-btn whatsapp" id="shareWhatsapp"><span>WhatsApp</span></button>
+                        <button class="social-btn copy-link" id="copyLink"><span>Copy Link</span></button>
+                    </div>
+                `;
+
+                hugDisplay.innerHTML = hugHTML;
+
+                // Apply effects
+                const hugAnimation = document.getElementById('hugAnimation');
+                if (hugAnimation) {
+                    hugAnimation.style.color = aiHug.color;
+                }
+
+                // Create particles
+                window.AIParticleSystem.createParticles(
+                    Math.floor(Math.random() * 12) + 6, 
+                    aiHug.color, 
+                    hugDisplay
+                );
+                
+                // Setup social sharing
+                setupSocialSharing(aiHug);
+                
+            } catch (error) {
+                console.error('Error updating hug display:', error);
+                throw error;
+            }
+        }
+        
+        function setupSocialSharing(aiHug) {
+            const shareData = {
+                title: `AI Hug: ${aiHug.name}`,
+                text: `I just received a ${aiHug.type} AI hug! ${aiHug.message}`,
+                url: window.location.href
+            };
+            
+            // Facebook Share
+            document.getElementById('shareFacebook')?.addEventListener('click', () => {
+                window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(shareData.url)}`, '_blank');
+            });
+            
+            // Twitter Share
+            document.getElementById('shareTwitter')?.addEventListener('click', () => {
+                window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
+            });
+            
+            // WhatsApp Share
+            document.getElementById('shareWhatsapp')?.addEventListener('click', () => {
+                window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`, '_blank');
+            });
+            
+            // Copy Link
+            document.getElementById('copyLink')?.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(shareData.url);
+                    showSuccess('Link copied to clipboard!');
+                } catch (error) {
+                    showError('Failed to copy link');
+                }
+            });
+        }
+        
+        // Enhanced event listeners setup
         function setupEventListeners() {
-            // Hug button with analytics
+            // Hug button
             const hugButton = document.getElementById('hugButton');
             if (hugButton) {
                 hugButton.addEventListener('click', function() {
-                    // Track button click
-                    window.analyticsManager.trackUserEngagement('generate_hug_click');
                     generateAIHug();
                 });
             }
             
             // Sound toggle
             const toggleSound = document.getElementById('toggleSound');
+            const aiSoundToggle = document.getElementById('aiSoundToggle');
+            const soundToggle = document.getElementById('soundToggle');
+            
             if (toggleSound) {
                 toggleSound.addEventListener('click', function() {
-                    const soundEnabled = window.userManager.toggleSound();
-                    this.innerHTML = soundEnabled ? '🔊 Sound: On' : '🔇 Sound: Off';
-                    window.analyticsManager.trackUserEngagement('toggle_sound', { enabled: soundEnabled });
+                    if (window.userManager) {
+                        const newState = window.userManager.toggleSound();
+                        this.textContent = `🔊 Sound: ${newState ? 'On' : 'Off'}`;
+                        if (aiSoundToggle) {
+                            aiSoundToggle.textContent = `🔊 AI Sound ${newState ? 'On' : 'Off'}`;
+                        }
+                        if (soundToggle) {
+                            soundToggle.checked = newState;
+                        }
+                    }
+                });
+            }
+            
+            if (aiSoundToggle) {
+                aiSoundToggle.addEventListener('click', function() {
+                    if (window.userManager) {
+                        const newState = window.userManager.toggleSound();
+                        this.textContent = `🔊 AI Sound ${newState ? 'On' : 'Off'}`;
+                        if (toggleSound) {
+                            toggleSound.textContent = `🔊 Sound: ${newState ? 'On' : 'Off'}`;
+                        }
+                        if (soundToggle) {
+                            soundToggle.checked = newState;
+                        }
+                    }
                 });
             }
             
@@ -347,194 +1353,121 @@
             const userSettings = document.getElementById('userSettings');
             const settingsModal = document.getElementById('settingsModal');
             const closeSettings = document.getElementById('closeSettings');
+            const themeSelect = document.getElementById('themeSelect');
+            const exportData = document.getElementById('exportData');
+            const clearData = document.getElementById('clearData');
             
-            if (userSettings) {
+            if (userSettings && settingsModal) {
                 userSettings.addEventListener('click', function() {
+                    // Populate settings
+                    if (window.userManager) {
+                        const stats = window.userManager.getUserStats();
+                        if (themeSelect) themeSelect.value = stats.theme;
+                        if (soundToggle) soundToggle.checked = stats.soundEnabled;
+                        if (document.getElementById('userIdDisplay')) {
+                            document.getElementById('userIdDisplay').value = stats.userId;
+                        }
+                    }
                     settingsModal.classList.remove('hidden');
-                    window.analyticsManager.trackUserEngagement('open_settings');
                 });
             }
             
-            if (closeSettings) {
+            if (closeSettings && settingsModal) {
                 closeSettings.addEventListener('click', function() {
                     settingsModal.classList.add('hidden');
                 });
             }
             
-            // Theme selector
-            const themeSelect = document.getElementById('themeSelect');
             if (themeSelect) {
                 themeSelect.addEventListener('change', function() {
-                    window.userManager.setTheme(this.value);
-                    window.analyticsManager.trackUserEngagement('change_theme', { theme: this.value });
-                });
-            }
-            
-            // Sound toggle in settings
-            const soundToggle = document.getElementById('soundToggle');
-            if (soundToggle) {
-                soundToggle.addEventListener('change', function() {
-                    window.userManager.toggleSound();
-                    updateUserStatsUI();
-                });
-            }
-            
-            // Export data
-            const exportData = document.getElementById('exportData');
-            if (exportData) {
-                exportData.addEventListener('click', function() {
-                    const userData = window.userManager.exportUserData();
-                    const dataStr = JSON.stringify(userData, null, 2);
-                    const dataBlob = new Blob([dataStr], { type: 'application/json' });
-                    
-                    const url = URL.createObjectURL(dataBlob);
-                    const link = document.createElement('a');
-                    link.href = url;
-                    link.download = `ai-hug-me-data-${new Date().toISOString().split('T')[0]}.json`;
-                    link.click();
-                    
-                    window.analyticsManager.trackUserEngagement('export_data');
-                    showSuccess('Data exported successfully!');
-                });
-            }
-            
-            // Clear data
-            const clearData = document.getElementById('clearData');
-            if (clearData) {
-                clearData.addEventListener('click', async function() {
-                    if (confirm('Are you sure you want to clear all your data? This cannot be undone.')) {
-                        await window.userManager.clearUserData();
-                        updateUserStatsUI();
-                        window.analyticsManager.trackUserEngagement('clear_data');
-                        showSuccess('All data cleared successfully!');
-                        settingsModal.classList.add('hidden');
+                    if (window.userManager) {
+                        window.userManager.setTheme(this.value);
                     }
                 });
             }
             
-            // Existing social sharing listeners remain the same
+            if (soundToggle) {
+                soundToggle.addEventListener('change', function() {
+                    if (window.userManager && window.userManager.userData.soundEnabled !== this.checked) {
+                        window.userManager.toggleSound();
+                    }
+                });
+            }
+            
+            if (exportData) {
+                exportData.addEventListener('click', function() {
+                    if (window.userManager) {
+                        const userData = window.userManager.exportUserData();
+                        const dataStr = JSON.stringify(userData, null, 2);
+                        const blob = new Blob([dataStr], { type: 'application/json' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = `ai-hug-me-data-${new Date().toISOString().split('T')[0]}.json`;
+                        a.click();
+                        showSuccess('User data exported successfully!');
+                    }
+                });
+            }
+            
+            if (clearData) {
+                clearData.addEventListener('click', async function() {
+                    if (confirm('Are you sure you want to clear all your data? This cannot be undone.')) {
+                        if (window.userManager) {
+                            const result = await window.userManager.clearUserData();
+                            if (result.success) {
+                                updateUserStatsUI();
+                                showSuccess('All user data cleared successfully!');
+                                settingsModal.classList.add('hidden');
+                            } else {
+                                showError('Failed to clear data');
+                            }
+                        }
+                    }
+                });
+            }
+            
+            // Close modals when clicking outside
             document.addEventListener('click', function(e) {
-                if (e.target.closest('#shareFacebook')) {
-                    shareOnFacebook();
-                } else if (e.target.closest('#shareTwitter')) {
-                    shareOnTwitter();
-                } else if (e.target.closest('#shareWhatsapp')) {
-                    shareOnWhatsApp();
-                } else if (e.target.closest('#copyLink')) {
-                    copyPageLink();
+                if (e.target.classList.contains('modal')) {
+                    e.target.classList.add('hidden');
                 }
             });
         }
+        
+        // Initialize everything when DOM is ready
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('✅ DOM loaded - initializing all systems');
+            
+            // Initialize core systems
+            window.AISoundSystem.init();
+            
+            // Setup event listeners
+            setupEventListeners();
+            
+            // Load initial data
+            loadSiteSettings();
+            updateLiveUsers();
+            
+            // Setup footer navigation
+            setupFooterNavigation();
+            
+            // Show welcome message
+            setTimeout(() => {
+                showSuccess('Welcome to AI Hug Me! All systems initialized. 🤖');
+            }, 1000);
+            
+            // Update live users periodically
+            setInterval(updateLiveUsers, 15000);
+        });
 
-        // Enhanced AI Hug Generation with Firebase
-        async function generateAIHug() {
-            try {
-                // Generate AI hug
-                const aiHug = AIHugEngine.generateAIHug();
-                
-                // Record hug in user manager
-                await window.userManager.recordHug(aiHug);
-                
-                // Update UI
-                updateHugDisplay(aiHug);
-                updateUserStatsUI();
-                
-                // Track successful hug generation
-                window.analyticsManager.trackHugGenerated(aiHug.type, aiHug);
-                
-                // Show success message
-                showSuccess(`AI generated ${aiHug.name} successfully! 🧠`);
-                
-            } catch (error) {
-                console.error('AI hug generation failed:', error);
-                window.analyticsManager.trackError('hug_generation_failed', error.message, 'generateAIHug');
-                showError('AI is learning... Try again! 🤖');
-            }
-        }
-
-        // Update hug display (existing function enhanced)
-        function updateHugDisplay(aiHug) {
-            const hugDisplay = document.getElementById('hugDisplay');
-            if (!hugDisplay) return;
-
-            hugDisplay.innerHTML = `
-                <div class="mood-indicator" id="moodIndicator">${getAIMood()}</div>
-                <div class="hug-animation ai-hug-animation" id="hugAnimation">${aiHug.animation}</div>
-                <div class="hug-message" id="hugMessage">${aiHug.message}</div>
-                <div class="hug-details" id="hugDetails">${aiHug.detail}</div>
-                <div class="hug-intensity">${aiHug.intensity}</div>
-                <div class="ai-confidence">AI Confidence: ${aiHug.aiConfidence}</div>
-                <div class="hug-combo" id="hugCombo">${generateAICombo()}</div>
-                <div class="hug-stats" id="hugStats"></div>
-                <div class="ai-hug-stats">
-                    Type: ${aiHug.type} | Particles: ${Math.floor(Math.random() * 15) + 5}
-                </div>
-                
-                <!-- User Stats -->
-                <div class="user-stats" id="userStats" style="margin-top: 15px; padding: 10px; background: rgba(255,255,255,0.1); border-radius: 8px;">
-                    <div style="font-size: 0.8rem; color: #666;">
-                        Your Stats: <span id="userHugCount">${window.userManager.userData.totalHugs}</span> hugs • Favorite: <span id="userFavoriteHug">${window.userManager.userData.favoriteHugType || 'None yet'}</span>
-                    </div>
-                </div>
-                
-                <div class="social-sharing" id="socialSharing">
-                    <button class="social-btn facebook" id="shareFacebook"><span>Facebook</span></button>
-                    <button class="social-btn twitter" id="shareTwitter"><span>Twitter</span></button>
-                    <button class="social-btn whatsapp" id="shareWhatsapp"><span>WhatsApp</span></button>
-                    <button class="social-btn copy-link" id="copyLink"><span>Copy Link</span></button>
-                </div>
-            `;
-
-            // Apply effects
-            const hugAnimation = document.getElementById('hugAnimation');
-            if (hugAnimation) {
-                hugAnimation.style.color = aiHug.color;
-                hugAnimation.classList.add(aiHug.effect);
-            }
-
-            // Play sound if enabled
-            if (window.userManager.userData.soundEnabled) {
-                AISoundSystem.playAISound(aiHug.soundPattern);
-            }
-
-            // Create particles
-            AIParticleSystem.createParticles(
-                Math.floor(Math.random() * 12) + 6, 
-                aiHug.color, 
-                hugDisplay
-            );
-
-            updateStatsDisplay();
-        }
-
-        // Existing functions remain the same but enhanced with analytics
-        function shareOnFacebook() {
-            // ... existing code ...
-            window.analyticsManager.trackUserEngagement('share_facebook');
-        }
-
-        function shareOnTwitter() {
-            // ... existing code ...
-            window.analyticsManager.trackUserEngagement('share_twitter');
-        }
-
-        function shareOnWhatsApp() {
-            // ... existing code ...
-            window.analyticsManager.trackUserEngagement('share_whatsapp');
-        }
-
-        function copyPageLink() {
-            // ... existing code ...
-            window.analyticsManager.trackUserEngagement('copy_link');
-        }
-
-        // ALL OTHER EXISTING FUNCTIONS REMAIN EXACTLY THE SAME
-        // AIHugEngine, AISoundSystem, AIParticleSystem, AdManager, PageManager
-        // All existing functionality preserved
-
-        // Make systems available globally
-        window.AdManager = AdManager;
-        window.PageManager = PageManager;
+        // Make functions globally available
+        window.showMainContent = showMainContent;
+        window.loadPageContent = loadPageContent;
     </script>
+
+    <!-- Load the external scripts -->
+    <script src="user-manager.js"></script>
+    <script src="analytics-manager.js"></script>
 </body>
 </html>

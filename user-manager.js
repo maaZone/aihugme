@@ -1,172 +1,142 @@
-// user-manager.js
-// User Management with Preferences & History
+// User Management System - Local Storage Only
+console.log('👤 Loading User Manager...');
 
-class UserManager {
-    constructor() {
-        this.userId = window.analyticsManager.userId;
-        this.userData = this.loadUserData();
-        this.init();
-    }
-
-    init() {
-        this.setupUserPreferences();
-        this.migrateOldData();
-        this.updateUserActivity();
-    }
-
-    loadUserData() {
-        const savedData = window.firebaseDB.getFromLocalStorage('user_data') || {};
-        return {
-            userId: this.userId,
-            totalHugs: savedData.totalHugs || 0,
-            favoriteHugType: savedData.favoriteHugType || '',
-            soundEnabled: savedData.soundEnabled !== false,
-            theme: savedData.theme || 'default',
-            createdAt: savedData.createdAt || new Date(),
-            lastActive: new Date(),
-            ...savedData
-        };
-    }
-
-    async saveUserData() {
-        this.userData.lastActive = new Date();
-        this.userData.totalHugs = this.userData.totalHugs || 0;
-
-        // Save locally
-        window.firebaseDB.saveToLocalStorage('user_data', this.userData);
-
-        // Save to Firebase
-        await window.firebaseDB.saveUserData(this.userId, this.userData);
-    }
-
-    setupUserPreferences() {
-        // Load sound preference
-        const soundEnabled = localStorage.getItem('aiSoundEnabled');
-        if (soundEnabled !== null) {
-            this.userData.soundEnabled = soundEnabled === 'true';
+window.userManager = {
+    userData: null,
+    userId: null,
+    
+    init: function() {
+        this.userId = this.getOrCreateUserId();
+        this.loadUserData();
+        console.log('✅ User Manager initialized for user:', this.userId);
+        
+        // Apply saved theme
+        if (this.userData.theme && this.userData.theme !== 'default') {
+            document.body.classList.add(`theme-${this.userData.theme}`);
         }
-
-        // Apply theme
-        this.applyTheme(this.userData.theme);
-    }
-
-    applyTheme(theme) {
-        const body = document.body;
-        body.classList.remove('theme-default', 'theme-blue', 'theme-green', 'theme-purple', 'theme-dark');
-        body.classList.add(`theme-${theme}`);
-        this.userData.theme = theme;
-        this.saveUserData();
-    }
-
-    // Hug Management
-    async recordHug(hugData) {
+    },
+    
+    getOrCreateUserId: function() {
+        let userId = localStorage.getItem('aihug_user_id');
+        if (!userId) {
+            userId = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('aihug_user_id', userId);
+        }
+        return userId;
+    },
+    
+    loadUserData: function() {
+        const stored = localStorage.getItem(`aihug_user_${this.userId}`);
+        if (stored) {
+            this.userData = JSON.parse(stored);
+        } else {
+            this.userData = {
+                userId: this.userId,
+                totalHugs: 0,
+                favoriteHugType: null,
+                soundEnabled: true,
+                theme: 'default',
+                hugHistory: [],
+                createdAt: new Date().toISOString(),
+                lastActive: new Date().toISOString()
+            };
+            this.saveUserData();
+        }
+        return this.userData;
+    },
+    
+    saveUserData: function() {
+        if (this.userData) {
+            this.userData.lastActive = new Date().toISOString();
+            localStorage.setItem(`aihug_user_${this.userId}`, JSON.stringify(this.userData));
+        }
+    },
+    
+    recordHug: async function(hugData) {
+        if (!this.userData) this.loadUserData();
+        
         this.userData.totalHugs++;
+        this.userData.hugHistory.unshift({
+            ...hugData,
+            timestamp: new Date().toISOString()
+        });
+        
+        // Keep only last 100 hugs
+        if (this.userData.hugHistory.length > 100) {
+            this.userData.hugHistory = this.userData.hugHistory.slice(0, 100);
+        }
         
         // Update favorite hug type
-        const hugType = hugData.type || 'emotional';
-        const typeCount = this.userData.hugTypeCount || {};
-        typeCount[hugType] = (typeCount[hugType] || 0) + 1;
-        this.userData.hugTypeCount = typeCount;
-
-        // Update favorite
-        const favorite = Object.keys(typeCount).reduce((a, b) => 
-            typeCount[a] > typeCount[b] ? a : b
-        );
-        this.userData.favoriteHugType = favorite;
-
-        await this.saveUserData();
-
-        // Track in analytics
-        window.analyticsManager.trackHugGenerated(hugType, {
-            ...hugData,
-            userTotalHugs: this.userData.totalHugs,
-            favoriteHugType: favorite
+        const hugCounts = {};
+        this.userData.hugHistory.forEach(hug => {
+            hugCounts[hug.type] = (hugCounts[hug.type] || 0) + 1;
         });
-    }
-
-    // User Preferences
-    toggleSound() {
+        
+        let maxCount = 0;
+        let favoriteType = null;
+        Object.keys(hugCounts).forEach(type => {
+            if (hugCounts[type] > maxCount) {
+                maxCount = hugCounts[type];
+                favoriteType = type;
+            }
+        });
+        
+        this.userData.favoriteHugType = favoriteType;
+        this.saveUserData();
+        
+        return { success: true, hugCount: this.userData.totalHugs };
+    },
+    
+    toggleSound: function() {
+        if (!this.userData) this.loadUserData();
         this.userData.soundEnabled = !this.userData.soundEnabled;
-        localStorage.setItem('aiSoundEnabled', this.userData.soundEnabled);
         this.saveUserData();
         return this.userData.soundEnabled;
-    }
-
-    setTheme(theme) {
-        this.applyTheme(theme);
-    }
-
-    // User Statistics
-    getUserStats() {
-        return {
-            totalHugs: this.userData.totalHugs || 0,
-            favoriteHugType: this.userData.favoriteHugType || 'None yet',
-            memberSince: new Date(this.userData.createdAt).toLocaleDateString(),
-            soundEnabled: this.userData.soundEnabled,
-            theme: this.userData.theme
-        };
-    }
-
-    // Migration from old data format
-    migrateOldData() {
-        // Migrate from old localStorage format if exists
-        const oldHugs = localStorage.getItem('aiHugMeUserData');
-        if (oldHugs) {
-            try {
-                const oldData = JSON.parse(oldHugs);
-                this.userData.totalHugs = oldData.personalHugs || 0;
-                this.userData.viralScore = oldData.viralScore || 0;
-                this.saveUserData();
-                
-                // Clear old data
-                localStorage.removeItem('aiHugMeUserData');
-            } catch (e) {
-                console.warn('Migration failed:', e);
-            }
+    },
+    
+    setTheme: function(theme) {
+        if (!this.userData) this.loadUserData();
+        this.userData.theme = theme;
+        this.saveUserData();
+        
+        // Apply theme to document
+        document.body.className = '';
+        if (theme !== 'default') {
+            document.body.classList.add(`theme-${theme}`);
         }
-    }
-
-    // Update user activity periodically
-    updateUserActivity() {
-        setInterval(() => {
-            this.userData.lastActive = new Date();
-            this.saveUserData();
-        }, 30000); // Every 30 seconds
-    }
-
-    // Export user data
-    exportUserData() {
+    },
+    
+    getUserStats: function() {
+        if (!this.userData) this.loadUserData();
+        return {
+            totalHugs: this.userData.totalHugs,
+            favoriteHugType: this.userData.favoriteHugType,
+            soundEnabled: this.userData.soundEnabled,
+            theme: this.userData.theme,
+            userId: this.userId
+        };
+    },
+    
+    exportUserData: function() {
+        if (!this.userData) this.loadUserData();
         return {
             ...this.userData,
-            hugHistory: window.firebaseDB.getFromLocalStorage('hugs') || [],
-            sessionHistory: window.firebaseDB.getFromLocalStorage('analytics')?.filter(
-                e => e.userId === this.userId
-            ) || []
+            exportDate: new Date().toISOString(),
+            exportVersion: '1.0'
         };
+    },
+    
+    clearUserData: async function() {
+        localStorage.removeItem(`aihug_user_${this.userId}`);
+        localStorage.removeItem('aihug_user_id');
+        this.userData = null;
+        this.userId = null;
+        this.init(); // Create new user
+        return { success: true };
     }
+};
 
-    // Clear user data
-    async clearUserData() {
-        this.userData = {
-            userId: this.userId,
-            totalHugs: 0,
-            favoriteHugType: '',
-            soundEnabled: true,
-            theme: 'default',
-            createdAt: new Date(),
-            lastActive: new Date()
-        };
-
-        // Clear local storage
-        localStorage.removeItem('aihug_user_data');
-        localStorage.removeItem('aihug_hugs');
-        localStorage.removeItem('aihug_analytics');
-        localStorage.removeItem('aiSoundEnabled');
-
-        await this.saveUserData();
-        return true;
-    }
-}
-
-// Initialize User Manager globally
-window.userManager = new UserManager();
+// Initialize user manager when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    window.userManager.init();
+});
