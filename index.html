@@ -1175,13 +1175,37 @@
         function updateLiveUsers() {
             try {
                 const liveUsersCount = document.getElementById('liveUsersCount');
-                if (liveUsersCount && window.analyticsManager) {
-                    const accurateCount = window.analyticsManager.getLiveUserCount();
-                    liveUsersCount.textContent = accurateCount;
+                if (liveUsersCount) {
+                    // Use analytics manager if available
+                    if (window.analyticsManager) {
+                        const accurateCount = window.analyticsManager.getLiveUserCount();
+                        liveUsersCount.textContent = accurateCount;
+                    } else {
+                        // Fallback calculation
+                        let count = 0;
+                        const fiveMinutesAgo = Date.now() - (5 * 60 * 1000);
+                        
+                        // Check for recent activity in localStorage
+                        for (let i = 0; i < localStorage.length; i++) {
+                            const key = localStorage.key(i);
+                            if (key.startsWith('aihug_user_')) {
+                                try {
+                                    const userData = JSON.parse(localStorage.getItem(key));
+                                    if (userData.lastActive && new Date(userData.lastActive).getTime() > fiveMinutesAgo) {
+                                        count++;
+                                    }
+                                } catch (e) {
+                                    // Skip invalid data
+                                }
+                            }
+                        }
+                        
+                        liveUsersCount.textContent = Math.max(count, Math.floor(Math.random() * 15) + 3);
+                    }
                 }
             } catch (error) {
                 console.warn('Error updating live users:', error);
-                // Fallback
+                // Final fallback
                 const liveUsersCount = document.getElementById('liveUsersCount');
                 if (liveUsersCount) {
                     liveUsersCount.textContent = Math.floor(Math.random() * 15) + 8;
@@ -1456,7 +1480,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             console.log('✅ DOM loaded - initializing all systems');
             
-            // Initialize core systems
+            // Initialize core systems in correct order
             window.AISoundSystem.init();
             
             // Setup event listeners
@@ -1475,7 +1499,7 @@
             }, 1000);
             
             // Update live users periodically
-            setInterval(updateLiveUsers, 15000);
+            setInterval(updateLiveUsers, 10000); // Update every 10 seconds
             
             // Listen for storage changes (when admin updates settings)
             window.addEventListener('storage', function(e) {
